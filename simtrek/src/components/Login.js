@@ -43,8 +43,8 @@ class Login extends React.Component {
         }
         /* this will deal with the submission of a validated form */
         else {
-            // event object should have user/pw somewhere
-            console.log(event);
+            console.log("username is: " + form.elements.formUser.value);
+            console.log("password is: " + form.elements.formPass.value);
             this.setState({
                 validated: true
             });
@@ -64,11 +64,11 @@ class Login extends React.Component {
                     <Form validated={this.state.validated} onSubmit={this.submitLoginForm}>
                         <Form.Label>Username</Form.Label>
                         <Form.Group controlId="formUsername">
-                            <Form.Control type="text" placeholder="Username" required/>
-                        </Form.Group> 
+                            <Form.Control name="formUser" type="text" placeholder="Username" required/>
+                        </Form.Group> <br/>
                         <Form.Label>Password</Form.Label>
                         <Form.Group controlId="formPassword">
-                            <Form.Control type="password" placeholder="Password" required/>
+                            <Form.Control name="formPass" type="password" placeholder="Password" required/>
                         </Form.Group>
                         <Button onClick={() => this.handleLoginClose()} color="primary">
                             Cancel

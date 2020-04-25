@@ -33,7 +33,7 @@ class SignUp extends React.Component {
         let form = event.currentTarget;
 
         // will refresh the components without this statement,
-        // useful for when users actually login/submit form
+        // useful for when users actually signup/submit form
         event.preventDefault();
 
         /* actions to do when the form is not complete */
@@ -42,8 +42,11 @@ class SignUp extends React.Component {
         }
         /* this will deal with the submission of a validated form */
         else {
-            // event object should have name/email/user/pw somewhere
-            console.log(event);
+            console.log("firstname is: " + form.elements.formFirst.value);
+            console.log("lastname is: " + form.elements.formLast.value);
+            console.log("email is: " + form.elements.formEmail.value);
+            console.log("username is: " + form.elements.formUser.value);
+            console.log("password is: " + form.elements.formPass.value);
         }
     }
 
@@ -62,27 +65,27 @@ class SignUp extends React.Component {
                         <Form.Row>
                             <Form.Label>First Name</Form.Label>
                             <Form.Group controlId="formFirstname">
-                                <Form.Control type="text" placeholder="First Name" required/>
-                            </Form.Group> 
+                                <Form.Control name="formFirst" type="text" placeholder="First Name" required/>
+                            </Form.Group> <br/> 
                             <Form.Label>Last Name</Form.Label>
                             <Form.Group controlId="formLastname">
-                                <Form.Control type="text" placeholder="Last Name" required/>
-                            </Form.Group> 
+                                <Form.Control name="formLast" type="text" placeholder="Last Name" required/>
+                            </Form.Group> <br/>
                         </Form.Row>
 
                         <Form.Label>Email</Form.Label>
-                        <Form.Group controlId="formEmail">
-                            <Form.Control type="text" placeholder="Email" required/>
-                        </Form.Group> 
+                        <Form.Group controlId="enteredEmail">
+                            <Form.Control name="formEmail" type="text" placeholder="Email" required/>
+                        </Form.Group> <br/>
 
                         <Form.Label>Username</Form.Label>
                         <Form.Group controlId="formUsername">
-                            <Form.Control type="text" placeholder="Username" required/>
-                        </Form.Group> 
+                            <Form.Control name="formUser" type="text" placeholder="Username" required/>
+                        </Form.Group> <br/>
                         <Form.Label>Password</Form.Label>
                         <Form.Group controlId="formPassword">
-                            <Form.Control type="password" placeholder="Password" required/>
-                        </Form.Group>
+                            <Form.Control name="formPass" type="password" placeholder="Password" required/>
+                        </Form.Group> <br/>
                         <Button onClick={() => this.handleSignUpClose()} color="primary">
                             Cancel
                         </Button>
