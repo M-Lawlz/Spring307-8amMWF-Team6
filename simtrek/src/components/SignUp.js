@@ -1,36 +1,35 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {FormControl, FormGroup, FormLabel} from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Form from 'react-bootstrap/Form';
 
-class Login extends React.Component {
+class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            validated: false,
-            open : (props.loginAttempt) ? true : false
+            open : (props.signupAttempt) ? true : false
         }
     }
 
-    handleLoginOpen() {
+    handleSignUpOpen() {
         this.setState({
             open: true
         });
     }
 
-    handleLoginClose() {
+    handleSignUpClose() {
         this.setState({
             open: false
         });
-        // pass false (for login popup) back up to the parent
-        this.props.loginAttempt(false);
+        this.props.signupAttempt(false);
     }
 
-    submitLoginForm = (event) => {
-        console.log("submit LOGIN clicked!");
+    // TODO: Implement
+    submitSignUpForm = (event) => {
+        console.log("submit SIGNUP clicked!");
         let form = event.currentTarget;
 
         // will refresh the components without this statement,
@@ -43,25 +42,39 @@ class Login extends React.Component {
         }
         /* this will deal with the submission of a validated form */
         else {
-            // event object should have user/pw somewhere
+            // event object should have name/email/user/pw somewhere
             console.log(event);
-            this.setState({
-                validated: true
-            });
         }
     }
 
     render() {
         return (
+            //TODO: look into these properties later (not working)
             <Dialog modal = {true}
             autoDetectWindowHeight={true} 
             autoScrollBodyContent={true}
             contentStyle={{height: "200px", width: "300xp"}}
-            onClose={() => this.handleLoginClose()} 
+            onClose={() => this.handleSignUpClose()} 
             open={this.state.open}>
-                <DialogTitle>Login</DialogTitle>
+                <DialogTitle>New VTravelr</DialogTitle>
                 <DialogContent>
-                    <Form validated={this.state.validated} onSubmit={this.submitLoginForm}>
+                    <Form validated={this.state.validated} onSubmit={this.submitSignUpForm}>
+                        <Form.Row>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Group controlId="formFirstname">
+                                <Form.Control type="text" placeholder="First Name" required/>
+                            </Form.Group> 
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Group controlId="formLastname">
+                                <Form.Control type="text" placeholder="Last Name" required/>
+                            </Form.Group> 
+                        </Form.Row>
+
+                        <Form.Label>Email</Form.Label>
+                        <Form.Group controlId="formEmail">
+                            <Form.Control type="text" placeholder="Email" required/>
+                        </Form.Group> 
+
                         <Form.Label>Username</Form.Label>
                         <Form.Group controlId="formUsername">
                             <Form.Control type="text" placeholder="Username" required/>
@@ -70,11 +83,11 @@ class Login extends React.Component {
                         <Form.Group controlId="formPassword">
                             <Form.Control type="password" placeholder="Password" required/>
                         </Form.Group>
-                        <Button onClick={() => this.handleLoginClose()} color="primary">
+                        <Button onClick={() => this.handleSignUpClose()} color="primary">
                             Cancel
                         </Button>
                         <Button type="submit" color="primary">
-                            Travel!
+                            Sign Up!
                         </Button>
                     </Form>
                 </DialogContent>
@@ -83,4 +96,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default SignUp;

@@ -5,31 +5,27 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import SignUp from './SignUp.js';
 import Login from './Login.js';
 
 class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showLogin : false
+            showLogin : false,
+            showSignUp : false
         }
-        // this.rerenderCallback = this.rerenderCallback.bind(this);
     }
 
-    // rerenderCallback() {
-    //     console.log("Parent component is rerendered");
-    //     this.setState({
-    //         showLogin: false
-    //     });
-    //     this.forceUpdate();
-    // }
-
-
-
     handleLoginClicked = (newVal) => {
-        console.log("show login is : " + this.state.showLogin);
         this.setState({
             showLogin: newVal
+        });
+    }
+
+    handleSignUpClicked = (newVal) => {
+        this.setState({
+            showSignUp: newVal
         });
     }
 
@@ -46,13 +42,12 @@ class NavBar extends React.Component {
                         <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                             <Button color="inherit" variant="outlined" type="submit" onClick={() => this.handleLoginClicked(!this.state.showLogin)}>                         
                             <em>Login</em>
-                                {this.state.showLogin ? 
-                                //<Login rerenderCallback={this.rerenderCallback} loginAttempt={() => this.handleLoginClicked}/> : null}
-                                <Login loginAttempt={this.handleLoginClicked}/> : null}
                             </Button> &nbsp;
-                            <Button color="inherit" variant="outlined">
+                            {this.state.showLogin ? <Login loginAttempt={this.handleLoginClicked}/> : null}
+                            <Button color="inherit" variant="outlined" type="submit" onClick={() => this.handleSignUpClicked(!this.state.showSignUp)}>
                                 <em>Sign Up</em>
                             </Button>
+                            {this.state.showSignUp ? <SignUp signupAttempt={this.handleSignUpClicked}/> : null}
                         </Grid>
                     </Toolbar>
                 </AppBar>
