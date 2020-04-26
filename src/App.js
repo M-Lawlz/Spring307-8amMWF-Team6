@@ -3,7 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  
+  function sayHello() {
+    alert('Hello, World!');
+  }
+
+
+
   return (
+
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -16,6 +24,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+            <button onClick={sayHello}>Click me!</button>
           Learn React
         </a>
       </header>
