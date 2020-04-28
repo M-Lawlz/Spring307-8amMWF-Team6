@@ -1,7 +1,6 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {FormControl, FormGroup, FormLabel} from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import Form from 'react-bootstrap/Form';
@@ -29,7 +28,6 @@ class SignUp extends React.Component {
 
     // TODO: Implement
     submitSignUpForm = (event) => {
-        console.log("submit SIGNUP clicked!");
         let form = event.currentTarget;
 
         // will refresh the components without this statement,
@@ -42,11 +40,7 @@ class SignUp extends React.Component {
         }
         /* this will deal with the submission of a validated form */
         else {
-            console.log("firstname is: " + form.elements.formFirst.value);
-            console.log("lastname is: " + form.elements.formLast.value);
-            console.log("email is: " + form.elements.formEmail.value);
-            console.log("username is: " + form.elements.formUser.value);
-            console.log("password is: " + form.elements.formPass.value);
+            // console.log("firstname is: " + form.elements.formFirst.value);
         }
     }
 

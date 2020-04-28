@@ -2,7 +2,6 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -21,7 +20,7 @@ class Login extends React.Component {
         });
     }
 
-    handleLoginClose() {
+    handleLoginClose = () => {
         this.setState({
             open: false
         });
@@ -30,7 +29,6 @@ class Login extends React.Component {
     }
 
     submitLoginForm = (event) => {
-        console.log("submit LOGIN clicked!");
         let form = event.currentTarget;
 
         // will refresh the components without this statement,
@@ -43,8 +41,7 @@ class Login extends React.Component {
         }
         /* this will deal with the submission of a validated form */
         else {
-            console.log("username is: " + form.elements.formUser.value);
-            console.log("password is: " + form.elements.formPass.value);
+            // console.log("username is: " + form.elements.formUser.value);
             this.setState({
                 validated: true
             });
@@ -57,7 +54,7 @@ class Login extends React.Component {
             autoDetectWindowHeight={true} 
             autoScrollBodyContent={true}
             contentStyle={{height: "200px", width: "300xp"}}
-            onClose={() => this.handleLoginClose()} 
+            onClose={this.handleLoginClose}
             open={this.state.open}>
                 <DialogTitle>Login</DialogTitle>
                 <DialogContent>
