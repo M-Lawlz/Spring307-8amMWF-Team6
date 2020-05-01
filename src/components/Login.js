@@ -5,7 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import Form from 'react-bootstrap/Form';
 
-class Login extends React.Component {
+export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -79,5 +79,3 @@ class Login extends React.Component {
         );
     }
 }
-
-export default Login;

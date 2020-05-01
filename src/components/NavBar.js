@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import SignUp from './SignUp.js';
 import Login from './Login.js';
 
-class NavBar extends React.Component {
+export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,11 +40,11 @@ class NavBar extends React.Component {
                             <h2>SimTrek</h2>
                         </Typography>
                         <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                            <Button color="inherit" variant="outlined" type="submit" onClick={() => this.handleLoginClicked(!this.state.showLogin)}>                         
+                            <Button color="inherit" variant="outlined" type="submit" onClick={this.handleLoginClicked}>                         
                             <em>Login</em>
                             </Button> &nbsp;
                             {this.state.showLogin ? <Login loginAttempt={this.handleLoginClicked}/> : null}
-                            <Button color="inherit" variant="outlined" type="submit" onClick={() => this.handleSignUpClicked(!this.state.showSignUp)}>
+                            <Button color="inherit" variant="outlined" type="submit" onClick={this.handleSignUpClicked}>
                                 <em>Sign Up</em>
                             </Button>
                             {this.state.showSignUp ? <SignUp signupAttempt={this.handleSignUpClicked}/> : null}
@@ -55,6 +55,3 @@ class NavBar extends React.Component {
         )
     }
 }
-
-export default NavBar;
-
