@@ -1,96 +1,141 @@
-import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
-import Form from 'react-bootstrap/Form';
+import App from "firebase/app";
+import "firebase/auth";
+import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+import { Form } from "react-bootstrap";
+import React from "react";
 
-class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open : (props.signupAttempt) ? true : false
-        }
-    }
+export default class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      open: props.signupAttempt ? true : false,
+      password: "",
+    };
+    this.auth = App.auth();
+  }
 
-    handleSignUpOpen() {
-        this.setState({
-            open: true
-        });
-    }
+  _attemptCreateAccount = () => {
+    this.auth
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(this._createAccount)
+      .catch(this._handleError);
+  };
 
-    handleSignUpClose() {
-        this.setState({
-            open: false
-        });
-        this.props.signupAttempt(false);
-    }
+  _createAccount = () => {
+    this._handleSignUpClose();
+    this.props.signupAttempt();
+  };
 
-    // TODO: Implement
-    submitSignUpForm = (event) => {
-        let form = event.currentTarget;
+  _handleEmailInput = (email) => {
+    this.setState({ email: email.target.value });
+  };
 
-        // will refresh the components without this statement,
-        // useful for when users actually signup/submit form
-        event.preventDefault();
+  _handleError = (error) => {
+    console.error("Failed to create account with error: ", error.message);
+  };
 
-        /* actions to do when the form is not complete */
-        if(form.checkValidity() === false) {
-            // event.stopPropogation();
-        }
-        /* this will deal with the submission of a validated form */
-        else {
-            // console.log("firstname is: " + form.elements.formFirst.value);
-        }
-    }
+  _handlePasswordInput = (password) => {
+    this.setState({ password: password.target.value });
+  };
 
-    render() {
-        return (
-            //TODO: look into these properties later (not working)
-            <Dialog modal = {true}
-            autoDetectWindowHeight={true} 
-            autoScrollBodyContent={true}
-            contentStyle={{height: "200px", width: "300xp"}}
-            onClose={() => this.handleSignUpClose()} 
-            open={this.state.open}>
-                <DialogTitle>New VTravelr</DialogTitle>
-                <DialogContent>
-                    <Form validated={this.state.validated} onSubmit={this.submitSignUpForm}>
-                        <Form.Row>
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Group controlId="formFirstname">
-                                <Form.Control name="formFirst" type="text" placeholder="First Name" required/>
-                            </Form.Group> <br/> 
-                            <Form.Label>Last Name</Form.Label>
-                            <Form.Group controlId="formLastname">
-                                <Form.Control name="formLast" type="text" placeholder="Last Name" required/>
-                            </Form.Group> <br/>
-                        </Form.Row>
+  _handleSignUpClose = () => {
+    this.setState({
+      open: false,
+    });
+    this.props.signupAttempt(false);
+  };
 
-                        <Form.Label>Email</Form.Label>
-                        <Form.Group controlId="enteredEmail">
-                            <Form.Control name="formEmail" type="text" placeholder="Email" required/>
-                        </Form.Group> <br/>
+  _handleSignUpOpen = () => {
+    this.setState({
+      open: true,
+    });
+  };
 
-                        <Form.Label>Username</Form.Label>
-                        <Form.Group controlId="formUsername">
-                            <Form.Control name="formUser" type="text" placeholder="Username" required/>
-                        </Form.Group> <br/>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Group controlId="formPassword">
-                            <Form.Control name="formPass" type="password" placeholder="Password" required/>
-                        </Form.Group> <br/>
-                        <Button onClick={() => this.handleSignUpClose()} color="primary">
-                            Cancel
-                        </Button>
-                        <Button type="submit" color="primary">
-                            Sign Up!
-                        </Button>
-                    </Form>
-                </DialogContent>
-            </Dialog>
-        );
-    }
+  _submitSignUpForm = (event) => {
+    event.preventDefault();
+    this._attemptCreateAccount();
+  };
+
+  render() {
+    return (
+      //TODO: look into these properties later (not working)
+      <Dialog
+        autoDetectWindowHeight={true}
+        autoScrollBodyContent={true}
+        contentStyle={{ height: "200px", width: "300xp" }}
+        modal={true}
+        onClose={this.handleSignUpClose}
+        open={this.state.open}
+      >
+        <DialogTitle>New VTravelr</DialogTitle>
+        <DialogContent>
+          <Form onSubmit={this._submitSignUpForm}>
+            <Form.Row>
+              <Form.Label>First Name</Form.Label>
+              <Form.Group controlId={"formFirstname"}>
+                <Form.Control
+                  name={"formFirst"}
+                  placeholder={"First Name"}
+                  required
+                  type={"text"}
+                />
+              </Form.Group>
+              <br />
+              <Form.Label>Last Name</Form.Label>
+              <Form.Group controlId={"formLastname"}>
+                <Form.Control
+                  name={"formLast"}
+                  placeholder={"Last Name"}
+                  required
+                  type={"text"}
+                />
+              </Form.Group>
+              <br />
+            </Form.Row>
+            <Form.Label>Email</Form.Label>
+            <Form.Group controlId={"enteredEmail"}>
+              <Form.Control
+                name={"formEmail"}
+                onInput={this._handleEmailInput}
+                placeholder={"Email"}
+                required
+                type={"email"}
+                value={this.state.email}
+              />
+            </Form.Group>
+            <br />
+            <Form.Label>Username</Form.Label>
+            <Form.Group controlId={"formUsername"}>
+              <Form.Control
+                name={"formUser"}
+                placeholder={"Username"}
+                required
+                type={"text"}
+              />
+            </Form.Group>
+            <br />
+            <Form.Label>Password</Form.Label>
+            <Form.Group controlId={"formPassword"}>
+              <Form.Control
+                name={"formPass"}
+                onInput={this._handlePasswordInput}
+                placeholder={"Password"}
+                required
+                type={"password"}
+                value={this.state.password}
+              />
+            </Form.Group>
+            <br />
+            <Button color={"primary"} onClick={this._handleSignUpClose}>
+              Cancel
+            </Button>
+            <Button color={"primary"} type={"submit"}>
+              Sign Up!
+            </Button>
+          </Form>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 }
-
-export default SignUp;
