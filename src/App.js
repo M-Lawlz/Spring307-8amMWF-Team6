@@ -1,7 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar';
 
+<<<<<<< HEAD
 function App() {
   
   function sayHello() {
@@ -10,9 +11,13 @@ function App() {
 
 
 
+=======
+export default function App() {
+>>>>>>> 6a2de7fac177b7391c244f2200558e9e4ea0eb39
   return (
 
     <div className="App">
+<<<<<<< HEAD
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -28,8 +33,9 @@ function App() {
           Learn React
         </a>
       </header>
+=======
+      <NavBar/>
+>>>>>>> 6a2de7fac177b7391c244f2200558e9e4ea0eb39
     </div>
   );
 }
-
-export default App;
