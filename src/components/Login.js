@@ -69,7 +69,7 @@ export default class Login extends React.Component {
         onClose={this.closeLogin}
         open={this.state.open}
       >
-        <DialogTitle>Login</DialogTitle>
+        <DialogTitle>Log In</DialogTitle>
         <DialogContent>
           <Form
             onSubmit={this.submitLoginForm}

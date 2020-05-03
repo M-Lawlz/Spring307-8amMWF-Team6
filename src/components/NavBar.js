@@ -85,7 +85,7 @@ export default class NavBar extends React.Component {
                     type="submit"
                     onClick={this.loginClicked}
                   >
-                    <em>Login</em>
+                    <em>Log In</em>
                   </Button>
                 )}
                 &nbsp;
