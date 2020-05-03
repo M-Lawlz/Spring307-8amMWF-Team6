@@ -1,81 +1,112 @@
-import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
-import Form from 'react-bootstrap/Form';
+import App from "firebase/app";
+import "firebase/auth";
+import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+import Form from "react-bootstrap/Form";
+import React from "react";
 
 export default class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            validated: false,
-            open : (props.loginAttempt) ? true : false
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      open: props.loginShowing ? true : false,
+      password: "",
+      validated: false,
+    };
+  }
+
+  attemptLogin = () => {
+    App.auth()
+      .setPersistence(App.auth.Auth.Persistence.LOCAL)
+      .catch(this.handleError);
+    App.auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(this.login)
+      .catch(this.handleError);
+  };
+
+  handleEmailInput = (email) => {
+    this.setState({ email: email.target.value });
+  };
+
+  handleError = (error) => {
+    alert(error.message);
+  };
+
+  closeLogin = () => {
+    this.setState({
+      open: false,
+    });
+    this.props.loginShowing(false);
+  };
+
+  handlePasswordInput = (password) => {
+    this.setState({ password: password.target.value });
+  };
+
+  login = () => {
+    alert("Successfully signed in!");
+    this.closeLogin();
+  };
+
+  submitLoginForm = (event) => {
+    event.preventDefault();
+    if (event.currentTarget.checkValidity() !== false) {
+      this.setState({
+        validated: true,
+      });
     }
+    this.attemptLogin();
+  };
 
-    handleLoginOpen() {
-        this.setState({
-            open: true
-        });
-    }
-
-    handleLoginClose = () => {
-        this.setState({
-            open: false
-        });
-        // pass false (for login popup) back up to the parent
-        this.props.loginAttempt(false);
-    }
-
-    submitLoginForm = (event) => {
-        let form = event.currentTarget;
-
-        // will refresh the components without this statement,
-        // useful for when users actually login/submit form
-        event.preventDefault();
-
-        /* actions to do when the form is not complete */
-        if(form.checkValidity() === false) {
-            // event.stopPropogation();
-        }
-        /* this will deal with the submission of a validated form */
-        else {
-            // console.log("username is: " + form.elements.formUser.value);
-            this.setState({
-                validated: true
-            });
-        }
-    }
-
-    render() {
-        return (
-            <Dialog modal = {true}
-            autoDetectWindowHeight={true} 
-            autoScrollBodyContent={true}
-            contentStyle={{height: "200px", width: "300xp"}}
-            onClose={this.handleLoginClose}
-            open={this.state.open}>
-                <DialogTitle>Login</DialogTitle>
-                <DialogContent>
-                    <Form validated={this.state.validated} onSubmit={this.submitLoginForm}>
-                        <Form.Label>Username</Form.Label>
-                        <Form.Group controlId="formUsername">
-                            <Form.Control name="formUser" type="text" placeholder="Username" required/>
-                        </Form.Group> <br/>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Group controlId="formPassword">
-                            <Form.Control name="formPass" type="password" placeholder="Password" required/>
-                        </Form.Group>
-                        <Button onClick={() => this.handleLoginClose()} color="primary">
-                            Cancel
-                        </Button>
-                        <Button type="submit" color="primary">
-                            Travel!
-                        </Button>
-                    </Form>
-                </DialogContent>
-            </Dialog>
-        );
-    }
+  render() {
+    return (
+      <Dialog
+        autoDetectWindowHeight={true}
+        autoScrollBodyContent={true}
+        contentStyle={{ height: "200px", width: "300px" }}
+        modal={true}
+        onClose={this.closeLogin}
+        open={this.state.open}
+      >
+        <DialogTitle>Log In</DialogTitle>
+        <DialogContent>
+          <Form
+            onSubmit={this.submitLoginForm}
+            validated={this.state.validated}
+          >
+            <Form.Label>Email</Form.Label>
+            <Form.Group controlId={"formEmail"}>
+              <Form.Control
+                name={"formEmail"}
+                onInput={this.handleEmailInput}
+                placeholder={"Email"}
+                required
+                type={"email"}
+                value={this.state.email}
+              />
+            </Form.Group>
+            <br />
+            <Form.Label>Password</Form.Label>
+            <Form.Group controlId={"formPassword"}>
+              <Form.Control
+                name={"formPass"}
+                onInput={this.handlePasswordInput}
+                placeholder={"Password"}
+                required
+                type={"password"}
+                value={this.state.password}
+              />
+            </Form.Group>
+            <Button color={"primary"} onClick={this.closeLogin}>
+              Cancel
+            </Button>
+            <Button color={"primary"} type={"submit"}>
+              Login
+            </Button>
+          </Form>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 }

@@ -9,52 +9,41 @@ export default class SignUp extends React.Component {
     super(props);
     this.state = {
       email: "",
-      open: props.signupAttempt ? true : false,
+      open: props.signUpShowing ? true : false,
       password: "",
     };
     this.auth = App.auth();
   }
 
-  _attemptCreateAccount = () => {
+  attemptSignUp = () => {
     this.auth
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(this._createAccount)
-      .catch(this._handleError);
+      .then(this.closeSignUp)
+      .catch(this.handleError);
   };
 
-  _createAccount = () => {
-    this._handleSignUpClose();
-    this.props.signupAttempt();
-  };
-
-  _handleEmailInput = (email) => {
+  handleEmailInput = (email) => {
     this.setState({ email: email.target.value });
   };
 
-  _handleError = (error) => {
+  handleError = (error) => {
     console.error("Failed to create account with error: ", error.message);
   };
 
-  _handlePasswordInput = (password) => {
+  handlePasswordInput = (password) => {
     this.setState({ password: password.target.value });
   };
 
-  _handleSignUpClose = () => {
+  closeSignUp = () => {
     this.setState({
       open: false,
     });
-    this.props.signupAttempt(false);
+    this.props.signUpShowing(false);
   };
 
-  _handleSignUpOpen = () => {
-    this.setState({
-      open: true,
-    });
-  };
-
-  _submitSignUpForm = (event) => {
+  submitSignUpForm = (event) => {
     event.preventDefault();
-    this._attemptCreateAccount();
+    this.attemptSignUp();
   };
 
   render() {
@@ -65,12 +54,12 @@ export default class SignUp extends React.Component {
         autoScrollBodyContent={true}
         contentStyle={{ height: "200px", width: "300xp" }}
         modal={true}
-        onClose={this.handleSignUpClose}
+        onClose={this.closeSignUp}
         open={this.state.open}
       >
-        <DialogTitle>New VTravelr</DialogTitle>
+        <DialogTitle>Create An Account</DialogTitle>
         <DialogContent>
-          <Form onSubmit={this._submitSignUpForm}>
+          <Form onSubmit={this.submitSignUpForm}>
             <Form.Row>
               <Form.Label>First Name</Form.Label>
               <Form.Group controlId={"formFirstname"}>
@@ -97,7 +86,7 @@ export default class SignUp extends React.Component {
             <Form.Group controlId={"enteredEmail"}>
               <Form.Control
                 name={"formEmail"}
-                onInput={this._handleEmailInput}
+                onInput={this.handleEmailInput}
                 placeholder={"Email"}
                 required
                 type={"email"}
@@ -119,7 +108,7 @@ export default class SignUp extends React.Component {
             <Form.Group controlId={"formPassword"}>
               <Form.Control
                 name={"formPass"}
-                onInput={this._handlePasswordInput}
+                onInput={this.handlePasswordInput}
                 placeholder={"Password"}
                 required
                 type={"password"}
@@ -127,7 +116,7 @@ export default class SignUp extends React.Component {
               />
             </Form.Group>
             <br />
-            <Button color={"primary"} onClick={this._handleSignUpClose}>
+            <Button color={"primary"} onClick={this.closeSignUp}>
               Cancel
             </Button>
             <Button color={"primary"} type={"submit"}>
