@@ -40,6 +40,11 @@ export default class Login extends React.Component {
     this.props.loginShowing(false);
   };
 
+  finishResetPassword = () => {
+    alert("Password reset email sent!");
+    this.switchToLogin();
+  };
+
   handlePasswordInput = (password) => {
     this.setState({ password: password.target.value });
   };
@@ -47,6 +52,13 @@ export default class Login extends React.Component {
   login = () => {
     alert("Successfully signed in!");
     this.closeLogin();
+  };
+
+  sendPasswordResetEmail = (email) => {
+    App.auth()
+      .sendPasswordResetEmail(email)
+      .then(this.finishResetPassword)
+      .catch(this.handleError);
   };
 
   submitLoginForm = (event) => {
@@ -59,54 +71,135 @@ export default class Login extends React.Component {
     this.attemptLogin();
   };
 
+  submitForgotPasswordForm = (event) => {
+    event.preventDefault();
+    if (event.currentTarget.checkValidity() !== false) {
+      this.setState({
+        validated: true,
+      });
+    }
+    this.sendPasswordResetEmail(this.state.email);
+  };
+
+  switchToForgotPassword = () => {
+    this.setState({
+      isForgotPassword: true,
+    });
+  };
+
+  switchToLogin = () => {
+    this.setState({
+      isForgotPassword: false,
+    });
+  };
+
   render() {
-    return (
-      <Dialog
-        autoDetectWindowHeight={true}
-        autoScrollBodyContent={true}
-        contentStyle={{ height: "200px", width: "300px" }}
-        modal={true}
-        onClose={this.closeLogin}
-        open={this.state.open}
-      >
-        <DialogTitle>Log In</DialogTitle>
-        <DialogContent>
-          <Form
-            onSubmit={this.submitLoginForm}
-            validated={this.state.validated}
-          >
-            <Form.Label>Email</Form.Label>
-            <Form.Group controlId={"formEmail"}>
-              <Form.Control
-                name={"formEmail"}
-                onInput={this.handleEmailInput}
-                placeholder={"Email"}
-                required
-                type={"email"}
-                value={this.state.email}
-              />
-            </Form.Group>
-            <br />
-            <Form.Label>Password</Form.Label>
-            <Form.Group controlId={"formPassword"}>
-              <Form.Control
-                name={"formPass"}
-                onInput={this.handlePasswordInput}
-                placeholder={"Password"}
-                required
-                type={"password"}
-                value={this.state.password}
-              />
-            </Form.Group>
-            <Button color={"primary"} onClick={this.closeLogin}>
-              Cancel
-            </Button>
-            <Button color={"primary"} type={"submit"}>
-              Login
-            </Button>
-          </Form>
-        </DialogContent>
-      </Dialog>
-    );
+    if (this.state.isForgotPassword) {
+      return (
+        <Dialog
+          autoDetectWindowHeight={true}
+          autoScrollBodyContent={true}
+          contentStyle={{ height: "200px", width: "300px" }}
+          modal={true}
+          onClose={this.switchToLogin}
+          open={this.state.open}
+        >
+          <DialogTitle style={{ textAlign: "center" }}>
+            Forgot Password
+          </DialogTitle>
+          <DialogContent>
+            <Form
+              onSubmit={this.submitForgotPasswordForm}
+              validated={this.state.validated}
+            >
+              <Form.Text>
+                If you've forgotten your password, please enter your email
+                below. If it exists in our system, you'll receive an email with
+                instructions on how to reset your password shortly.
+              </Form.Text>
+              <br />
+              <br />
+              <Form.Label style={{ alignSelf: "center" }}>Email</Form.Label>
+              <Form.Group controlId={"formEmail"}>
+                <Form.Control
+                  name={"formEmail"}
+                  onInput={this.handleEmailInput}
+                  placeholder={"Email"}
+                  required
+                  style={{ width: "200px" }}
+                  type={"email"}
+                  value={this.state.email}
+                />
+              </Form.Group>
+              <br />
+              <Button color={"primary"} onClick={this.switchToLogin}>
+                Cancel
+              </Button>
+              <Button color={"primary"} type={"Submit"}>
+                Send Email
+              </Button>
+            </Form>
+          </DialogContent>
+        </Dialog>
+      );
+    } else {
+      return (
+        <Dialog
+          autoDetectWindowHeight={true}
+          autoScrollBodyContent={true}
+          contentStyle={{ height: "200px", width: "300px" }}
+          modal={true}
+          onClose={this.closeLogin}
+          open={this.state.open}
+        >
+          <DialogTitle style={{ textAlign: "center" }}>Log In</DialogTitle>
+          <DialogContent>
+            <Form
+              onSubmit={this.submitLoginForm}
+              validated={this.state.validated}
+            >
+              <Form.Label>Email</Form.Label>
+              <Form.Group controlId={"formEmail"}>
+                <Form.Control
+                  name={"formEmail"}
+                  onInput={this.handleEmailInput}
+                  placeholder={"Email"}
+                  required
+                  type={"email"}
+                  value={this.state.email}
+                />
+              </Form.Group>
+              <br />
+              <Form.Label>Password</Form.Label>
+              <Form.Group controlId={"formPassword"}>
+                <Form.Control
+                  name={"formPass"}
+                  onInput={this.handlePasswordInput}
+                  placeholder={"Password"}
+                  required
+                  type={"password"}
+                  value={this.state.password}
+                />
+              </Form.Group>
+              <Button
+                color={"primary"}
+                style={{ fontSize: 10, textAlign: "left" }}
+                onClick={this.switchToForgotPassword}
+              >
+                Forgot Password?
+              </Button>
+              <br />
+              <br />
+              <Button color={"primary"} onClick={this.closeLogin}>
+                Cancel
+              </Button>
+              <Button color={"primary"} type={"submit"}>
+                Login
+              </Button>
+            </Form>
+          </DialogContent>
+        </Dialog>
+      );
+    }
   }
 }
