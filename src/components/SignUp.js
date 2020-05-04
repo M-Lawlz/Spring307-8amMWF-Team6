@@ -57,7 +57,9 @@ export default class SignUp extends React.Component {
         onClose={this.closeSignUp}
         open={this.state.open}
       >
-        <DialogTitle>Create An Account</DialogTitle>
+        <DialogTitle style={{ textAlign: "center" }}>
+          Create An Account
+        </DialogTitle>
         <DialogContent>
           <Form onSubmit={this.submitSignUpForm}>
             <Form.Row>
