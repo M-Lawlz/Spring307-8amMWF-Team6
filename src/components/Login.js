@@ -9,6 +9,7 @@ export default class Login extends React.Component {
     super(props);
     this.state = {
       email: "",
+      isForgotPassword: false,
       open: props.loginShowing ? true : false,
       password: "",
       validated: false,
@@ -25,13 +26,14 @@ export default class Login extends React.Component {
       .catch(this.handleError);
   };
 
-  handleEmailInput = (email) => {
-    this.setState({ email: email.target.value });
-  };
-
-  handleError = (error) => {
-    alert(error.message);
-  };
+  checkFormValidation(event) {
+    event.preventDefault();
+    if (event.currentTarget.checkValidity() !== false) {
+      this.setState({
+        validated: true,
+      });
+    }
+  }
 
   closeLogin = () => {
     this.setState({
@@ -42,7 +44,15 @@ export default class Login extends React.Component {
 
   finishResetPassword = () => {
     alert("Password reset email sent!");
-    this.switchToLogin();
+    this.toggleForgotPassword();
+  }
+
+  handleEmailInput = (email) => {
+    this.setState({ email: email.target.value });
+  };
+
+  handleError = (error) => {
+    alert(error.message);
   };
 
   handlePasswordInput = (password) => {
@@ -61,35 +71,18 @@ export default class Login extends React.Component {
       .catch(this.handleError);
   };
 
-  submitLoginForm = (event) => {
-    event.preventDefault();
-    if (event.currentTarget.checkValidity() !== false) {
-      this.setState({
-        validated: true,
-      });
+  submitForm = (event) => {
+    this.checkFormValidation(event);
+    if (this.state.isForgotPassword) {
+      this.sendPasswordResetEmail(this.state.email);
+    } else {
+      this.attemptLogin();
     }
-    this.attemptLogin();
-  };
+  }
 
-  submitForgotPasswordForm = (event) => {
-    event.preventDefault();
-    if (event.currentTarget.checkValidity() !== false) {
-      this.setState({
-        validated: true,
-      });
-    }
-    this.sendPasswordResetEmail(this.state.email);
-  };
-
-  switchToForgotPassword = () => {
+  toggleForgotPassword = () => {
     this.setState({
-      isForgotPassword: true,
-    });
-  };
-
-  switchToLogin = () => {
-    this.setState({
-      isForgotPassword: false,
+      isForgotPassword: !this.state.isForgotPassword,
     });
   };
 
@@ -101,7 +94,7 @@ export default class Login extends React.Component {
           autoScrollBodyContent={true}
           contentStyle={{ height: "200px", width: "300px" }}
           modal={true}
-          onClose={this.switchToLogin}
+          onClose={this.toggleForgotPassword}
           open={this.state.open}
         >
           <DialogTitle style={{ textAlign: "center" }}>
@@ -109,7 +102,7 @@ export default class Login extends React.Component {
           </DialogTitle>
           <DialogContent>
             <Form
-              onSubmit={this.submitForgotPasswordForm}
+              onSubmit={this.submitForm}
               validated={this.state.validated}
             >
               <Form.Text>
@@ -132,7 +125,7 @@ export default class Login extends React.Component {
                 />
               </Form.Group>
               <br />
-              <Button color={"primary"} onClick={this.switchToLogin}>
+              <Button color={"primary"} onClick={this.toggleForgotPassword}>
                 Cancel
               </Button>
               <Button color={"primary"} type={"Submit"}>
@@ -155,7 +148,7 @@ export default class Login extends React.Component {
           <DialogTitle style={{ textAlign: "center" }}>Log In</DialogTitle>
           <DialogContent>
             <Form
-              onSubmit={this.submitLoginForm}
+              onSubmit={this.submitForm}
               validated={this.state.validated}
             >
               <Form.Label>Email</Form.Label>
@@ -184,7 +177,7 @@ export default class Login extends React.Component {
               <Button
                 color={"primary"}
                 style={{ fontSize: 10, textAlign: "left" }}
-                onClick={this.switchToForgotPassword}
+                onClick={this.toggleForgotPassword}
               >
                 Forgot Password?
               </Button>
