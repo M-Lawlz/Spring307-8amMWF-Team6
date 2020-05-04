@@ -48,6 +48,9 @@ export default class NavBar extends React.Component {
                                 <em>Sign Up</em>
                             </Button>
                             {this.state.showSignUp ? <SignUp signupAttempt={this.handleSignUpClicked}/> : null}
+                   
+
+
                         </Grid>
                     </Toolbar>
                 </AppBar>
