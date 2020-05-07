@@ -1,7 +1,7 @@
-import React from 'react'
-class Home extends React.Component {
+import React from "react";
+
+export default class Home extends React.Component {
   render() {
-    return <h1> Tours </h1>
+    return <h1>Tours</h1>;
   }
 }
-export default Home

@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import Login from "./Login.js";
+import { HashRouter, Link } from "react-router-dom";
 import React from "react";
 import SignUp from "./SignUp.js";
 
@@ -72,9 +73,24 @@ export default class NavBar extends React.Component {
               <Typography variant="h6">
                 <h2>SimTrek</h2>
               </Typography>
+              <HashRouter>
+                <Link style={{ color: "inherit" }} to={"/About"}>
+                  <Button
+                    color={"inherit"}
+                    style={{ marginLeft: 50, width: 150 }}
+                  >
+                    <h3>About Us</h3>
+                  </Button>
+                </Link>
+                <Link style={{ color: "inherit" }} to={"/Tours"}>
+                  <Button color={"inherit"} style={{ marginLeft: 25 }}>
+                    <h3>Tours</h3>
+                  </Button>
+                </Link>
+              </HashRouter>
               <Grid
                 container
-                alignItems="flex-start"
+                alignItems="center"
                 justify="flex-end"
                 direction="row"
               >
@@ -91,6 +107,22 @@ export default class NavBar extends React.Component {
                 &nbsp;
                 {this.state.isLoginShowing ? (
                   <Login loginShowing={this.loginClicked} />
+                ) : null}
+                {this.state.user ? (
+                  <HashRouter>
+                    <Link
+                      style={{ color: "inherit", marginRight: 20 }}
+                      to={"/Account"}
+                    >
+                      <Button
+                        color={"inherit"}
+                        onClick={() => console.log("Account clicked.")}
+                        variant={"outlined"}
+                      >
+                        <em>Account</em>
+                      </Button>
+                    </Link>
+                  </HashRouter>
                 ) : null}
                 {this.state.user ? (
                   <Button

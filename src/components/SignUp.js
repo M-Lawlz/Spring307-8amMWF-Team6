@@ -22,6 +22,13 @@ export default class SignUp extends React.Component {
       .catch(this.handleError);
   };
 
+  closeSignUp = () => {
+    this.setState({
+      open: false,
+    });
+    this.props.signUpShowing(false);
+  };
+
   handleEmailInput = (email) => {
     this.setState({ email: email.target.value });
   };
@@ -32,13 +39,6 @@ export default class SignUp extends React.Component {
 
   handlePasswordInput = (password) => {
     this.setState({ password: password.target.value });
-  };
-
-  closeSignUp = () => {
-    this.setState({
-      open: false,
-    });
-    this.props.signUpShowing(false);
   };
 
   submitSignUpForm = (event) => {
