@@ -1,7 +1,7 @@
-import React from 'react'
-class Tours extends React.Component {
+import React from "react";
+
+export default class Tours extends React.Component {
   render() {
-    return <h1>Tours</h1>
+    return <h1>Tours</h1>;
   }
 }
-export default Tours
