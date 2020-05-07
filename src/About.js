@@ -12,6 +12,7 @@ export default class About extends React.Component {
           a “vtravelr” account and connect with other users, potentially being
           able to take virtual tours together. Furthermore, users will be able
           to rate tours in order to enable user feedback. Virtual tours will
+          contain a description of the city, pictures of the city, and a virtual
           tour that is AR accessible.
         </p>
         <h3> New Features Coming Soon </h3>
