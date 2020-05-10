@@ -21,8 +21,6 @@ export default class NavBar extends React.Component {
       isLoading: true,
       isLoginShowing: false,
       isSignUpShowing: false,
-      isTouring: false,
-      currentTour: null,
       user: null,
     };
   }
