@@ -2,6 +2,7 @@ import React,{useState}  from "react";
 import "./App.css"
 import TourSample from './TourSample'
 import "firebase/firestore";
+import ReactPlayer from "react-player";
 
 
 export default class Tours extends React.Component {
@@ -10,7 +11,7 @@ export default class Tours extends React.Component {
 
 
    this.state = {
-           tours : [{}],
+           tours : [],
            isSearching : false,
            selectDropdowns : [],
            searchVal : "",
@@ -52,16 +53,32 @@ export default class Tours extends React.Component {
    
 
 
+
 render() {
-	const t = this.state.tours[0]
-	const a = t.TourId
-	console.log(t)
-	console.log(a)
-	const tours = this.state.tours
-   return (<div className="container">
-      <h1>View Tours</h1>
-      	
-    </div>) 
+	//const t = this.state.tours[1]
+	//const a = t.tourId
+	//console.log(t)
+	//console.log(a)
+	//const tours = this.state.tours
+   return (
+
+  		<div>
+  		<h1> View Tours </h1>
+ 		 <p>{this.state.tours.map(tour => <div>
+ 		 	<h2>{tour.location}</h2>
+ 		 	<p>{tour.description}</p>
+ 		 	<p>{tour.uploadDate.toString()}</p>
+ 		 	 <div class="col-md-6 col-md-offset-3">
+                            <ReactPlayer url={tour.videoUrl} controls/>
+            </div>
+
+ 		 	</div>)}</p>
+       
+      </div>
+     
+    
+
+    ) 
   }
 
   	}
