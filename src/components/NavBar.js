@@ -12,6 +12,7 @@ import Login from "./Login.js";
 import { HashRouter, Link } from "react-router-dom";
 import React from "react";
 import SignUp from "./SignUp.js";
+import NavSearch from "./NavSearch.js";
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -71,7 +72,9 @@ export default class NavBar extends React.Component {
                 aria-label="menu"
               ></IconButton>
               <Typography variant="h6">
-                <h2>SimTrek</h2>
+                <div>
+                  <h2>SimTrek</h2>
+                </div>
               </Typography>
               <HashRouter>
                 <Link style={{ color: "inherit" }} to={"/About"}>
@@ -87,11 +90,17 @@ export default class NavBar extends React.Component {
                     <h3>Tours</h3>
                   </Button>
                 </Link>
+
                 <Link style={{ color: "inherit" }} to={"/UploadTour"}>
                   <Button color={"inherit"} style={{ marginLeft: 35, width: 100}}>
                     <h3>Upload a Tour</h3>
                   </Button>
                 </Link>
+
+                <div className="tab">
+                  <NavSearch/>
+                </div>
+
               </HashRouter>
               <Grid
                 container

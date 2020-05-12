@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  height:auto;
+  min-height:100%;
+  background-color: lightgray;
+  overflow: show;
 }
 
 .App-logo {
@@ -35,4 +39,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.tab {
+  padding-left: 300px;
+}
+
+.rowC{display:flex; flex-direction:row;}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  box-shadow: 0 50vh 0 50vh #D3D3D3;
 }
