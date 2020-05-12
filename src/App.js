@@ -6,6 +6,7 @@ import Home from "./Home";
 import NavBar from "./components/NavBar";
 import React from "react";
 import Tours from "./Tours";
+import UploadTour from "./UploadTour";
 import TourPage from "./components/TourPage";
 
 export default class App extends React.Component {
@@ -19,6 +20,7 @@ export default class App extends React.Component {
             <Route component={About} path="/About" />
             <Route component={Account} path="/Account" />
             <Route component={Tours} path="/Tours" />
+            <Route component={UploadTour} path="/UploadTour" />
             <Route component={TourPage} path="/TourPage/:Id" />
           </div>
         </HashRouter>
