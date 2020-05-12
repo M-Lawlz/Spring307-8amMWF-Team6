@@ -30,7 +30,6 @@ export default class Tours extends React.Component {
                    videoUrl: tour.data().videoUrl,
                    description: tour.data().description};
        dbTourArray.push(newDbTour);
-      console.log(this.state.tours)
        this.setState({
 
            tours : dbTourArray
@@ -55,24 +54,22 @@ export default class Tours extends React.Component {
 
 
 render() {
-	//const t = this.state.tours[1]
-	//const a = t.tourId
-	//console.log(t)
-	//console.log(a)
-	//const tours = this.state.tours
+
    return (
 
   		<div>
   		<h1> View Tours </h1>
- 		 <p>{this.state.tours.map(tour => <div>
- 		 	<h2>{tour.location}</h2>
+ 		 <p>{this.state.tours.map(tour => 
+ 		 	<div class="media">
+ 		 	<h3 class="media-heading">{tour.location}</h3>
  		 	<p>{tour.description}</p>
  		 	<p>{tour.uploadDate.toString()}</p>
- 		 	 <div class="col-md-6 col-md-offset-3">
+ 		 	 <div class="media-body">
                             <ReactPlayer url={tour.videoUrl} controls/>
             </div>
 
- 		 	</div>)}</p>
+ 		 	</div>)
+ 		 }</p>
        
       </div>
      
