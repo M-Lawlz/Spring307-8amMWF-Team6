@@ -130,6 +130,7 @@ export default class NavBar extends React.Component {
                     >
                       <Button
                         color={"inherit"}
+                        onClick={() => console.log("Account clicked.")}
                         variant={"outlined"}
                       >
                         <em>Account</em>
