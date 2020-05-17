@@ -15,4 +15,7 @@ export default class Firebase {
   constructor() {
     App.initializeApp(config);
   }
+
+
+
 }
