@@ -1,12 +1,12 @@
-import React,{useState}  from "react";
-import "./App.css"
-import TourSample from './TourSample'
+import React, { useState } from "react";
+import "./App.css";
+import TourSample from "./TourSample";
 import "firebase/firestore";
 import ReactPlayer from "react-player";
 
-
 export default class Tours extends React.Component {
   constructor(props) {
+
    super(props);
 
 
@@ -79,6 +79,7 @@ export default class Tours extends React.Component {
    }
 
  }
+
 
 
 
