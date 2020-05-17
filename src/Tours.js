@@ -12,11 +12,6 @@ export default class Tours extends React.Component {
 
    this.state = {
      tours : [],
-     isSearching : false,
-     selectDropdowns : [],
-     searchVal : "",
-     retrieveTourPage : false,
-     currentTour : []
    }
  }
 
@@ -59,16 +54,17 @@ export default class Tours extends React.Component {
 
       <div>
       <h1> View Tours </h1>
-    
+
       <p>{this.state.tours.map(tour => 
        <div class="media">
-       <h3 class="media-heading">{tour.location}</h3>
-       <p>{tour.description}</p>
-       <p>{tour.uploadDate.toString()}</p>
-       <div class="centered">
-       <ReactPlayer url={tour.videoUrl} controls/>
-       </div>
-       </div>)
+        <h3 class="media-heading">{tour.location}</h3>
+          <p>{tour.description}</p>
+          <p>{tour.uploadDate.toString()}</p>
+              <div class="centered">
+                 <ReactPlayer url={tour.videoUrl} controls/>
+             </div>
+       
+      </div>)
      }</p>
 
      </div>
