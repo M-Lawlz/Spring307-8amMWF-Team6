@@ -61,6 +61,7 @@ class AddTourForm extends React.Component {
       <input type="text" 
       name="name" 
       placeholder="Name of Tour" 
+      required
       onChange={this.updateInput}
       />
       
@@ -68,6 +69,7 @@ class AddTourForm extends React.Component {
       <input type="text" 
       name="location" 
       placeholder="Tour Location"
+      required
       onChange={this.updateInput}
       value={this.state.location}/>
       
@@ -75,6 +77,7 @@ class AddTourForm extends React.Component {
       <input type="text" 
       name="description"
       placeholder="Tour Description" 
+      required
       onChange={this.updateInput} 
       value={this.state.description}/>
       
@@ -82,13 +85,15 @@ class AddTourForm extends React.Component {
       <input type="text" 
       name="videoUrl" 
       placeholder="Embed Link"
+      required
       onChange={this.updateInput} 
       value={this.state.videoUrl}/>
       
       <label>Upload Date</label>
-      <input type="text" 
+      <input type="date" 
       name="uploadDate" 
       placeholder="Current Date"
+      required
       onChange={this.updateInput} 
       value={this.state.uploadDate}/>
       

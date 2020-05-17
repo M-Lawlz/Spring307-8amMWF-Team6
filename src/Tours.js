@@ -12,6 +12,7 @@ export default class Tours extends React.Component {
 
    this.state = {
      tours : [],
+     tourId: ""
    }
  }
 
