@@ -87,6 +87,7 @@ export default class NavSearch extends React.Component {
                     {/* TODO: Implement at most 5 dropdowns & figure out text color */}
                     <Select placeholder="Search..." 
                         options={options}
+                        maxMenuHeight={190}
                         onClick={this.handleNavSearch}
                         onChange={this.handleSearchChange}
                         theme={(theme) => ({
