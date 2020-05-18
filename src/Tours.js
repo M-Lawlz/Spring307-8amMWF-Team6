@@ -3,6 +3,14 @@ import "./App.css";
 import TourSample from "./TourSample";
 import "firebase/firestore";
 import ReactPlayer from "react-player";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom";
+import TourPage from "./components/TourPage";
+
 
 export default class Tours extends React.Component {
   constructor(props) {
@@ -58,14 +66,24 @@ export default class Tours extends React.Component {
 
       <p>{this.state.tours.map(tour => 
        <div class="media">
-        <h3 class="media-heading">{tour.location}</h3>
-          <p>{tour.description}</p>
-          <p>{tour.uploadDate.toString()}</p>
-              <div class="centered">
-                 <ReactPlayer url={tour.videoUrl} controls/>
-             </div>
+
+
+       <h3 class="media-heading">
+       {tour.location}
+       </h3>
+
+      
+   
+    <Link to="/TourPage">Tour Page</Link>
        
-      </div>)
+
+       <p>{tour.description}</p>
+       <p>{tour.uploadDate.toString()}</p>
+       <div class="centered">
+       <ReactPlayer url={tour.videoUrl} controls/>
+       </div>
+       
+       </div>)
      }</p>
 
      </div>
