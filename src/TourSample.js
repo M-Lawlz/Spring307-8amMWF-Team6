@@ -11,9 +11,12 @@ const TourSample = () => (
     </thead>
     <tbody>
       <tr>
-        <td>Tour Name</td>
-        <td>Description</td>
+        <td>TourName data</td>
+         <td>Location data</td>
+        <td>Description data</td>
+        <td>Embed Url</td>
         <td>
+          <button className="button muted-button">Add Tour</button>
           <button className="button muted-button">Edit</button>
           <button className="button muted-button">Delete</button>
         </td>

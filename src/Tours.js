@@ -6,63 +6,78 @@ import ReactPlayer from "react-player";
 
 export default class Tours extends React.Component {
   constructor(props) {
-    super(props);
 
-    this.state = {
-      tours: [],
-      isSearching: false,
-      selectDropdowns: [],
-      searchVal: "",
-      retrieveTourPage: false,
-      currentTour: [],
-    };
-  }
+   super(props);
 
-  handleNewData = (tour) => {
-    var dbTourArray = this.state.tours;
-    var newDbTour = {
-      tourId: tour.data().tourId,
-      userEmail: tour.data().userEmail,
-      location: tour.data().location,
-      uploadDate: tour.data().uploadDate,
-      videoUrl: tour.data().videoUrl,
-      description: tour.data().description,
-    };
-    dbTourArray.push(newDbTour);
-    this.setState({
-      tours: dbTourArray,
-    });
-  };
 
-  componentDidMount() {
-    const firebase = require("firebase");
-    const db = firebase.firestore();
-    const toursDb = db.collection("Tours");
+   this.state = {
+     tours : [],
+     tourId: ""
+   }
+ }
 
-    toursDb.get().then((snapshot) => {
-      snapshot.forEach((doc) => {
-        this.handleNewData(doc);
-      });
-    });
-  }
 
-  render() {
-    return (
+ handleNewData = (tour) => {
+   var dbTourArray = this.state.tours;
+   var newDbTour = {tourId: tour.data().tourId,
+     userEmail: tour.data().userEmail,
+     location: tour.data().location,
+     uploadDate: tour.data().uploadDate,
+     videoUrl: tour.data().videoUrl,
+     description: tour.data().description};
+     dbTourArray.push(newDbTour);
+     this.setState({
+
+       tours : dbTourArray
+       
+     });
+   }
+
+   componentDidMount() {
+
+     const firebase = require("firebase");
+     const db = firebase.firestore();
+     const toursDb = db.collection("Tours");
+
+     toursDb.get().then(snapshot => {
+       snapshot.forEach(doc => {
+         this.handleNewData(doc);
+       });
+     });
+   }
+   
+
+
+
+   render() {
+
+     return (
+
       <div>
-        <h1> View Tours </h1>
-        <p>
-          {this.state.tours.map((tour) => (
-            <div class="media">
-              <h3 class="media-heading">{tour.location}</h3>
-              <p>{tour.description}</p>
-              <p>{tour.uploadDate.toString()}</p>
-              <div className="centered">
-                <ReactPlayer url={tour.videoUrl} controls />
-              </div>
-            </div>
-          ))}
-        </p>
-      </div>
-    );
-  }
-}
+      <h1> View Tours </h1>
+
+      <p>{this.state.tours.map(tour => 
+       <div class="media">
+        <h3 class="media-heading">{tour.location}</h3>
+          <p>{tour.description}</p>
+          <p>{tour.uploadDate.toString()}</p>
+              <div class="centered">
+                 <ReactPlayer url={tour.videoUrl} controls/>
+             </div>
+       
+      </div>)
+     }</p>
+
+     </div>
+     
+
+
+     ) 
+   }
+
+ }
+
+
+
+
+

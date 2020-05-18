@@ -33,7 +33,7 @@ export default class NavSearch extends React.Component {
        var selectTourArray = this.state.selectDropdowns;
        var newDropdownTour = {
            label : tour.data().location,
-           value : tour.data().tourId.toString()
+           value : "" + tour.data().tourId
        };
        selectTourArray.push(newDropdownTour);
       
