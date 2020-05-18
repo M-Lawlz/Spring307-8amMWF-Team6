@@ -55,7 +55,7 @@ export default class SignUp extends React.Component {
   };
 
   handleError = (error) => {
-    alert("Error: ", error.message);
+    alert("Error: " + error.message);
   };
 
   handleFirstNameInput = (firstName) => {
