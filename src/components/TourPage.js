@@ -54,6 +54,7 @@ export default class TourPage extends React.Component {
             return x.tourId == this.state.tourId
         });
         return (
+
             <div className="tourPage" class="row">
                 <div class="column">
                     {
@@ -73,6 +74,7 @@ export default class TourPage extends React.Component {
                 <div class="column" className="centered">
                     <CommentMod tourId={this.state.tourId}/>
                 </div>
+
             </div>
         )
     }

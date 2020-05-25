@@ -37,7 +37,8 @@ class AddTourForm extends React.Component {
       location: this.state.location,
       description: this.state.description,
       videoUrl: this.state.videoUrl,
-      uploadDate: this.state.uploadDate
+      uploadDate: this.state.uploadDate,
+      tourId: Math.floor(Math.random() * 1000)
 
     });  
 
