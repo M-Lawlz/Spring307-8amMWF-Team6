@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactPlayer from "react-player";
+import CommentMod from './CommentMod';
 
 export default class TourPage extends React.Component {
     constructor(props) {
@@ -53,24 +54,27 @@ export default class TourPage extends React.Component {
             return x.tourId == this.state.tourId
         });
         return (
-            <div className="tourPage">
-                {
-                (this.state.tourId !== undefined && current !== undefined) ?
-                    <div>
-                        <h1>{current.location}</h1>
-                        
-                        <div className="centered">
-                            <ReactPlayer url={current.videoUrl} controls/>
-                        </div>
-                        
-                        
 
+            <div className="tourPage" class="row">
+                <div class="column">
+                    {
+                    (this.state.tourId !== undefined && current !== undefined) ?
+                        <div>
+                            <h1>{current.location}</h1>
+                            <hr></hr>
+                            <br/>
+                            <div className="centered">
+                                <ReactPlayer url={current.videoUrl}
+                                controls/>
+                            </div>
+                        </div> 
+                        : null
+                    }
+                </div>
+                <div class="column" className="centered">
+                    <CommentMod tourId={this.state.tourId}/>
+                </div>
 
-
-
-                    </div> 
-                    : null
-                }
             </div>
         )
     }

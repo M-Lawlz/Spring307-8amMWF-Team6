@@ -39,10 +39,13 @@ export default class SignUp extends React.Component {
       .catch(this.handleError);
   };
 
+  cancelSignUp = () => {
+    this.setState({ open: false });
+    this.props.signUpShowing(false);
+  };
+
   closeSignUp = () => {
-    this.setState({
-      open: false,
-    });
+    this.setState({ open: false });
     this.props.signUpShowing(false);
     alert("Successfully made an account! Welcome to SimTrek.");
   };
@@ -52,7 +55,7 @@ export default class SignUp extends React.Component {
   };
 
   handleError = (error) => {
-    alert("Error: ", error.message);
+    alert("Error: " + error.message);
   };
 
   handleFirstNameInput = (firstName) => {
@@ -154,7 +157,7 @@ export default class SignUp extends React.Component {
               />
             </Form.Group>
             <br />
-            <Button color={"primary"} onClick={this.closeSignUp}>
+            <Button color={"primary"} onClick={this.cancelSignUp}>
               Cancel
             </Button>
             <Button color={"primary"} type={"submit"}>
