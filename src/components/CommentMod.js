@@ -68,9 +68,7 @@ export default class CommentMod extends React.Component {
         var updatedComments = this.state.currentTourComments;
         updatedComments.push(newItem);
         this.setState({
-            currentTourComments : updatedComments
-        });
-        this.setState({
+            currentTourComments : updatedComments,
             newComment: ""
         });
         event.preventDefault();
@@ -103,7 +101,7 @@ export default class CommentMod extends React.Component {
                     </form>
                     <div>
                         {
-                            (this.state.currentTourComments !== null) ?
+                            (this.state.currentTourComments !== null && this.state.currentTourComments !== undefined) ?
                             <div>
                                 {this.state.currentTourComments.map(com => {
                                     return (

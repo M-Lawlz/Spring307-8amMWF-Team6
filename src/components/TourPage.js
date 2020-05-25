@@ -8,7 +8,7 @@ export default class TourPage extends React.Component {
         this.state = {
             tours : [],
             currentTour : [],
-            tourId : this.props.location.pathname.slice(-1)
+            tourId : this.props.location.pathname.substring(this.props.location.pathname.lastIndexOf('/') + 1)
         }
     }
 

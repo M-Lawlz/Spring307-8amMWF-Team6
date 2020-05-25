@@ -14,9 +14,26 @@ class AddTourForm extends React.Component {
       location: "",
       uploadDate: "",
       videoUrl: "",
-      description: ""
-
+      description: "",
+      currentTourValue: 0
     }
+  }
+
+
+  componentDidMount() {
+    const firebase = require("firebase");
+    const db = firebase.firestore();
+    const toursDb = db.collection("Tours");
+    
+    toursDb.get().then(snapshot => {
+        snapshot.forEach(doc => {
+            if(doc.data().tourId > this.state.currentTourValue) {
+                this.setState({
+                    currentTourValue : doc.data().tourId
+                });
+            }
+        });
+    });
   }
 
 
@@ -33,16 +50,21 @@ class AddTourForm extends React.Component {
     db.settings({
       timestampsInSnapshots: true
     });
-    const tourRef = db.collection("Tours").add({
+    // const tourRef = db.collection("Tours").add({
+    //   location: this.state.location,
+    //   description: this.state.description,
+    //   videoUrl: this.state.videoUrl,
+    //   uploadDate: this.state.uploadDate,
+    //   tourId: Math.floor(Math.random() * 1000)
+    // });  
+    const tourRef = db.collection("Tours").doc((this.state.currentTourValue + 1).toString()).set({
       location: this.state.location,
       description: this.state.description,
       videoUrl: this.state.videoUrl,
       uploadDate: this.state.uploadDate,
-      tourId: Math.floor(Math.random() * 1000)
-
-    });  
-
-
+      tourId: this.state.currentTourValue + 1
+      // tourId: Math.floor(Math.random() * 1000)
+    });
 
     this.setState({
       tourId: "",
@@ -50,7 +72,8 @@ class AddTourForm extends React.Component {
       location: "",
       uploadDate: "",
       videoUrl: "",
-      description: ""
+      description: "",
+      currentTourValue : this.state.currentTourValue + 1
     });
   };
 
