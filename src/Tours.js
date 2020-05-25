@@ -65,17 +65,14 @@ export default class Tours extends React.Component {
       <h1> View Tours </h1>
 
       <p>{this.state.tours.map(tour => 
-       <div class="media">
 
+         <article class="media content-section">
+      
+        <div class="media-body">
 
        <h3 class="media-heading">
-       {tour.location}
+       <Link to={'TourPage/'+tour.tourId}>{tour.location}</Link>    
        </h3>
-
-      
-   
-    <Link to="/TourPage">Tour Page</Link>
-       
 
        <p>{tour.description}</p>
        <p>{tour.uploadDate.toString()}</p>
@@ -83,7 +80,9 @@ export default class Tours extends React.Component {
        <ReactPlayer url={tour.videoUrl} controls/>
        </div>
        
-       </div>)
+       </div>
+</article>
+       )
      }</p>
 
      </div>

@@ -58,9 +58,16 @@ export default class TourPage extends React.Component {
                 (this.state.tourId !== undefined && current !== undefined) ?
                     <div>
                         <h1>{current.location}</h1>
+                        
                         <div className="centered">
                             <ReactPlayer url={current.videoUrl} controls/>
                         </div>
+                        
+                        
+
+
+
+
                     </div> 
                     : null
                 }
