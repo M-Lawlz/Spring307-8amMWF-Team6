@@ -1,9 +1,9 @@
 import Login from "../components/Login";
 import React from "react";
-import Renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+import toJson from "enzyme-to-json";
 
 test("Login renders successfully", () => {
-  const login = Renderer.create(<Login />);
-  const loginJSON = login.toJSON();
-  expect(loginJSON).toMatchSnapshot();
+  const login = shallow(<Login />);
+  expect(toJson(login)).toMatchSnapshot();
 });

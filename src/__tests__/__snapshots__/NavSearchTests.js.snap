@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavSearch renders successfully 1`] = `
+<div
+  className="rowC"
+>
+  <div
+    id="container"
+    style={
+      Object {
+        "width": "200px",
+      }
+    }
+  >
+    <StateManager
+      defaultInputValue=""
+      defaultMenuIsOpen={false}
+      defaultValue={null}
+      maxMenuHeight={190}
+      onChange={[Function]}
+      onClick={[Function]}
+      options={Array []}
+      placeholder="Search..."
+      theme={[Function]}
+    />
+  </div>
+  <Link
+    style={
+      Object {
+        "color": "inherit",
+      }
+    }
+    to={
+      Object {
+        "pathname": "/TourPage/undefined",
+        "state": Array [],
+      }
+    }
+  >
+    <WithStyles(ForwardRef(Button))
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      GO
+    </WithStyles(ForwardRef(Button))>
+  </Link>
+</div>
+`;

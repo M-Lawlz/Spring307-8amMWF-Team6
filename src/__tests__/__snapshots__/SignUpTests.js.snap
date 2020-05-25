@@ -1,3 +1,143 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignUp renders successfully 1`] = `null`;
+exports[`SignUp renders successfully 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  autoDetectWindowHeight={true}
+  autoScrollBodyContent={true}
+  contentStyle={
+    Object {
+      "height": "200px",
+      "width": "300xp",
+    }
+  }
+  modal={true}
+  onClose={[Function]}
+  open={false}
+>
+  <WithStyles(ForwardRef(DialogTitle))
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    Create An Account
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <Form
+      inline={false}
+      onSubmit={[Function]}
+    >
+      <FormRow>
+        <FormLabel
+          column={false}
+          srOnly={false}
+        >
+          First Name
+        </FormLabel>
+        <FormGroup
+          controlId="formFirstname"
+        >
+          <FormControl
+            name="formFirst"
+            onInput={[Function]}
+            placeholder="First Name"
+            required={true}
+            type="text"
+            value=""
+          />
+        </FormGroup>
+        <br />
+        <FormLabel
+          column={false}
+          srOnly={false}
+        >
+          Last Name
+        </FormLabel>
+        <FormGroup
+          controlId="formLastname"
+        >
+          <FormControl
+            name="formLast"
+            onInput={[Function]}
+            placeholder="Last Name"
+            required={true}
+            type="text"
+            value=""
+          />
+        </FormGroup>
+        <br />
+      </FormRow>
+      <FormLabel
+        column={false}
+        srOnly={false}
+      >
+        Email
+      </FormLabel>
+      <FormGroup
+        controlId="enteredEmail"
+      >
+        <FormControl
+          name="formEmail"
+          onInput={[Function]}
+          placeholder="Email"
+          required={true}
+          type="email"
+          value=""
+        />
+      </FormGroup>
+      <br />
+      <FormLabel
+        column={false}
+        srOnly={false}
+      >
+        Username
+      </FormLabel>
+      <FormGroup
+        controlId="formUsername"
+      >
+        <FormControl
+          name="formUser"
+          onInput={[Function]}
+          placeholder="Username"
+          required={true}
+          type="text"
+          value=""
+        />
+      </FormGroup>
+      <br />
+      <FormLabel
+        column={false}
+        srOnly={false}
+      >
+        Password
+      </FormLabel>
+      <FormGroup
+        controlId="formPassword"
+      >
+        <FormControl
+          name="formPass"
+          onInput={[Function]}
+          placeholder="Password"
+          required={true}
+          type="password"
+          value=""
+        />
+      </FormGroup>
+      <br />
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        onClick={[Function]}
+      >
+        Cancel
+      </WithStyles(ForwardRef(Button))>
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        type="submit"
+      >
+        Sign Up!
+      </WithStyles(ForwardRef(Button))>
+    </Form>
+  </WithStyles(ForwardRef(DialogContent))>
+</WithStyles(ForwardRef(Dialog))>
+`;
