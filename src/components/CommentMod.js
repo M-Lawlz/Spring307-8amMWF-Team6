@@ -101,7 +101,8 @@ export default class CommentMod extends React.Component {
                     </form>
                     <div>
                         {
-                            (this.state.currentTourComments !== null && this.state.currentTourComments !== undefined) ?
+                            (this.state.currentTourComments !== null 
+                                && this.state.currentTourComments !== undefined) ?
                             <div>
                                 {this.state.currentTourComments.map(com => {
                                     return (

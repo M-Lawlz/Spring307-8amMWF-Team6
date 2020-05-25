@@ -49,21 +49,13 @@ class AddTourForm extends React.Component {
     const db = firebase.firestore();
     db.settings({
       timestampsInSnapshots: true
-    });
-    // const tourRef = db.collection("Tours").add({
-    //   location: this.state.location,
-    //   description: this.state.description,
-    //   videoUrl: this.state.videoUrl,
-    //   uploadDate: this.state.uploadDate,
-    //   tourId: Math.floor(Math.random() * 1000)
-    // });  
+    }); 
     const tourRef = db.collection("Tours").doc((this.state.currentTourValue + 1).toString()).set({
       location: this.state.location,
       description: this.state.description,
       videoUrl: this.state.videoUrl,
       uploadDate: this.state.uploadDate,
       tourId: this.state.currentTourValue + 1
-      // tourId: Math.floor(Math.random() * 1000)
     });
 
     this.setState({
