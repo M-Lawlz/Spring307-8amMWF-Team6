@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadTour renders successfully 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Upload Tours Here
+  </h1>
+  <div
+    className="flex-row"
+  >
+    <div
+      className="flex-large"
+    >
+      <h2>
+        Add Tour
+      </h2>
+      <AddTourForm />
+    </div>
+    <div
+      className="flex-large"
+    />
+  </div>
+</div>
+`;

@@ -1,3 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login renders successfully 1`] = `null`;
+exports[`Login renders successfully 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  autoDetectWindowHeight={true}
+  autoScrollBodyContent={true}
+  contentStyle={
+    Object {
+      "height": "200px",
+      "width": "300px",
+    }
+  }
+  modal={true}
+  onClose={[Function]}
+  open={false}
+>
+  <WithStyles(ForwardRef(DialogTitle))
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    Log In
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <Form
+      inline={false}
+      onSubmit={[Function]}
+      validated={false}
+    >
+      <FormLabel
+        column={false}
+        srOnly={false}
+      >
+        Email
+      </FormLabel>
+      <FormGroup
+        controlId="formEmail"
+      >
+        <FormControl
+          name="formEmail"
+          onInput={[Function]}
+          placeholder="Email"
+          required={true}
+          type="email"
+          value=""
+        />
+      </FormGroup>
+      <br />
+      <FormLabel
+        column={false}
+        srOnly={false}
+      >
+        Password
+      </FormLabel>
+      <FormGroup
+        controlId="formPassword"
+      >
+        <FormControl
+          name="formPass"
+          onInput={[Function]}
+          placeholder="Password"
+          required={true}
+          type="password"
+          value=""
+        />
+      </FormGroup>
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        onClick={[Function]}
+        style={
+          Object {
+            "fontSize": 10,
+            "textAlign": "left",
+          }
+        }
+      >
+        Forgot Password?
+      </WithStyles(ForwardRef(Button))>
+      <br />
+      <br />
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        onClick={[Function]}
+      >
+        Cancel
+      </WithStyles(ForwardRef(Button))>
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        type="submit"
+      >
+        Login
+      </WithStyles(ForwardRef(Button))>
+    </Form>
+  </WithStyles(ForwardRef(DialogContent))>
+</WithStyles(ForwardRef(Dialog))>
+`;

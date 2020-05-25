@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddTourForm renders successfully 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <label>
+    Tour Name
+  </label>
+  <input
+    name="name"
+    onChange={[Function]}
+    placeholder="Name of Tour"
+    required={true}
+    type="text"
+  />
+  <label>
+    Location
+  </label>
+  <input
+    name="location"
+    onChange={[Function]}
+    placeholder="Tour Location"
+    required={true}
+    type="text"
+    value=""
+  />
+  <label>
+    Description
+  </label>
+  <input
+    name="description"
+    onChange={[Function]}
+    placeholder="Tour Description"
+    required={true}
+    type="text"
+    value=""
+  />
+  <label>
+    Embed Url
+  </label>
+  <input
+    name="videoUrl"
+    onChange={[Function]}
+    placeholder="Embed Link"
+    required={true}
+    type="text"
+    value=""
+  />
+  <label>
+    Upload Date
+  </label>
+  <input
+    name="uploadDate"
+    onChange={[Function]}
+    placeholder="Current Date"
+    required={true}
+    type="date"
+    value=""
+  />
+  <button
+    type="submit"
+  >
+    Add Tour
+  </button>
+</form>
+`;
