@@ -24,7 +24,6 @@ export default class Tours extends React.Component {
    }
  }
 
-
  handleNewData = (tour) => {
    var dbTourArray = this.state.tours;
    var newDbTour = {tourId: tour.data().tourId,

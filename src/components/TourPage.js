@@ -8,7 +8,7 @@ export default class TourPage extends React.Component {
         this.state = {
             tours : [],
             currentTour : [],
-            tourId : this.props.location.pathname.slice(-1)
+            tourId : this.props.location.pathname.substring(this.props.location.pathname.lastIndexOf('/') + 1)
         }
     }
 
@@ -31,7 +31,7 @@ export default class TourPage extends React.Component {
         it being the same TourPage path */
         window.location.reload(true);
         this.setState({
-            tourId : this.props.location.pathname.slice(-1)
+            tourId : this.props.location.pathname.substring(this.props.location.pathname.lastIndexOf('/') + 1)
         });
     }
     
