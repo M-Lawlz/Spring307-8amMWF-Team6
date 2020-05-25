@@ -27,6 +27,9 @@ export default class NavBar extends React.Component {
 
   attemptLogout = () => {
     App.auth().signOut().then(this.logout).catch(this.handleError);
+    /* added this refresh to prevent commenting
+    immediately after they log out */
+    window.location.reload(true);
   };
 
   componentDidMount() {

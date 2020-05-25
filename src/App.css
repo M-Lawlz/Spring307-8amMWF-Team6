@@ -42,7 +42,7 @@
 }
 
 .tab {
-  padding-left: 300px;
+  padding-left: 265px;
 }
 
 .rowC{display:flex; flex-direction:row;}
@@ -56,4 +56,41 @@
 footer {
   box-shadow: 0 50vh 0 50vh #D3D3D3;
   min-height: 1vh;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.commentBox {
+  /* max-width: 35rem; */
+  width: 25rem;
+  color: #fff;
+  background-color: #55B914;
+  border-radius: 72px;
+  padding: 10px 50px 10px;
+}
+
+.commentForm {
+  background-color: #fff;
+  border-radius: 4px;
+  /* could use this to expand & put comments under */
+  margin-bottom: 20px;
+  padding: 10px;  
+}
+
+.commentText {
+  width: 22rem;
+}
+
+.commentSection {
+  border: #fff;
 }
