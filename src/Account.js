@@ -87,9 +87,14 @@ export default class extends React.Component {
           <Sidebar
             onSetOpen={this.setSidebarStatus}
             open={this.state.sidebarOpen}
-            shadow={false}
             sidebar={
-              <div style={{ position: "absolute", top: 140 }}>
+              <div style={{ position: "absolute" }}>
+                <Button
+                  onClick={this.setSidebarStatus}
+                  style={styles.sidebarButton}
+                >
+                  Close Account Settings
+                </Button>
                 <Button
                   onClick={this.firstNameClicked}
                   style={styles.sidebarButton}
@@ -116,8 +121,12 @@ export default class extends React.Component {
                 </Button>
               </div>
             }
-            styles={{ sidebar: { backgroundColor: "white", width: 250 } }}
-          ></Sidebar>
+            styles={{
+              overlay: { zIndex: -1 },
+              root: { height: "100%", top: 102, width: 250 },
+              sidebar: { backgroundColor: "white", width: 250 },
+            }}
+          />
           {this.state.isChangingFirstName ? (
             <AccountForm
               formType={"firstName"}
@@ -139,32 +148,36 @@ export default class extends React.Component {
               isFormShowing={this.passwordClicked}
             />
           ) : null}
-          <Avatar
+          <div
             class={"centered"}
-            src={
-              this.state.profilePicture ? this.state.profilePicture.uri : null
-            }
-            style={{ width: 200, height: 200 }}
-          />
-          <h1>Hi there, {this.state.userData.firstName}.</h1>
-          <h2>
-            {this.state.userData.tours
-              ? "Here are your tours."
-              : "It looks like you haven't uploaded any tours yet."}
-          </h2>
-          <h3>
-            {this.state.userData.tours
-              ? null
-              : "You can upload a tour using the navigation bar at the top."}
-          </h3>
-          <Button
-            onClick={this.setSidebarStatus}
-            style={{ position: "absolute", left: 10, top: 110, zIndex: 2 }}
+            style={{ flexDirection: "column", marginTop: 20 }}
           >
-            {this.state.sidebarOpen
-              ? "Close Account Settings"
-              : "Account Settings"}
-          </Button>
+            <Avatar
+              src={
+                this.state.profilePicture ? this.state.profilePicture.uri : null
+              }
+              style={{ height: 200, width: 200 }}
+            />
+            <h1>Hi there, {this.state.userData.firstName}.</h1>
+            <h2>
+              {this.state.userData.tours
+                ? "Here are your tours."
+                : "It looks like you haven't uploaded any tours yet."}
+            </h2>
+            <h3>
+              {this.state.userData.tours
+                ? null
+                : "You can upload a tour using the navigation bar at the top."}
+            </h3>
+          </div>
+          {this.state.sidebarOpen ? null : (
+            <Button
+              onClick={this.setSidebarStatus}
+              style={{ position: "absolute", left: 10, top: 110, zIndex: 2 }}
+            >
+              Account Settings
+            </Button>
+          )}
         </div>
       );
     }
