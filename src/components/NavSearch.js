@@ -53,6 +53,8 @@ export default class NavSearch extends React.Component {
            snapshot.forEach(doc => {
                this.handleNewData(doc);
            });
+       }).catch(function(error) {
+           console.log("Error getting document:", error);
        });
    }
   
@@ -66,7 +68,6 @@ export default class NavSearch extends React.Component {
 
    handleSearchChange = (value, { action }) => {
     if (action === 'select-option') {
-      // do something
       this.setState({
           searchVal : value.label
       });

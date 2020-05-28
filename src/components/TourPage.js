@@ -44,6 +44,8 @@ export default class TourPage extends React.Component {
             snapshot.forEach(doc => {
                 this.handleNewData(doc);
             });
+        }).catch(function(error) {
+            console.log("Error getting document: ", error);
         });
     }
 
@@ -54,7 +56,6 @@ export default class TourPage extends React.Component {
             return x.tourId == this.state.tourId
         });
         return (
-
             <div className="tourPage" class="row">
                 <div class="column">
                     {

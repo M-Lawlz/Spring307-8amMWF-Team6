@@ -33,6 +33,8 @@ export default class CommentMod extends React.Component {
                     });
                 }
             });
+        }).catch(function(error) {
+            console.log("Error getting document: ", error);
         });
     }
 
