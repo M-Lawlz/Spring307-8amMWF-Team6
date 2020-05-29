@@ -13,17 +13,19 @@ export default class TourPage extends React.Component {
     }
 
     handleNewData = (tour) => {
-        var dbTourArray = this.state.tours;
-        var newDbTour = {tourId: tour.data().tourId,
-                    userEmail: tour.data().userEmail,
-                    location: tour.data().location,
-                    uploadDate: tour.data().uploadDate,
-                    videoUrl: tour.data().videoUrl,
-                    description: tour.data().description};
-        dbTourArray.push(newDbTour);
-        this.setState({
-            tours: dbTourArray
-        });
+        if(tour.exists) {
+            var dbTourArray = this.state.tours;
+            var newDbTour = {tourId: tour.data().tourId,
+                        userEmail: tour.data().userEmail,
+                        location: tour.data().location,
+                        uploadDate: tour.data().uploadDate,
+                        videoUrl: tour.data().videoUrl,
+                        description: tour.data().description};
+            dbTourArray.push(newDbTour);
+            this.setState({
+                tours: dbTourArray
+            });
+        }
     }
 
     componentWillReceiveProps() {
@@ -35,18 +37,20 @@ export default class TourPage extends React.Component {
         });
     }
     
-    componentDidMount() {
+    async componentDidMount() {
         const firebase = require("firebase");
         const db = firebase.firestore();
         const toursDb = db.collection("Tours");
-  
-        toursDb.get().then(snapshot => {
+    
+        if(toursDb !== undefined) {
+        await toursDb.get().then(snapshot => {
             snapshot.forEach(doc => {
                 this.handleNewData(doc);
             });
         }).catch(function(error) {
             console.log("Error getting document: ", error);
         });
+        }
     }
 
     render() {
@@ -59,7 +63,8 @@ export default class TourPage extends React.Component {
             <div className="tourPage" class="row">
                 <div class="column">
                     {
-                    (this.state.tourId !== undefined && current !== undefined) ?
+                    (this.state.tourId !== undefined 
+                        && current !== undefined) ?
                         <div>
                             <h1>{current.location}</h1>
                             <hr></hr>
@@ -73,7 +78,9 @@ export default class TourPage extends React.Component {
                     }
                 </div>
                 <div class="column" className="centered">
-                    <CommentMod tourId={this.state.tourId}/>
+                    {(this.state.tourId !== undefined) ? 
+                    <CommentMod tourId={this.state.tourId}/> :
+                    null}
                 </div>
 
             </div>

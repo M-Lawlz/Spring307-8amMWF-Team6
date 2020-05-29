@@ -2,6 +2,19 @@
 
 exports[`TourPage renders successfully 1`] = `
 <div
+  class="row"
   className="tourPage"
-/>
+>
+  <div
+    class="column"
+  />
+  <div
+    class="column"
+    className="centered"
+  >
+    <CommentMod
+      tourId="Test"
+    />
+  </div>
+</div>
 `;

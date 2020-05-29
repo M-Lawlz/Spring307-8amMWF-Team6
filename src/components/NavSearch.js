@@ -19,43 +19,47 @@ export default class NavSearch extends React.Component {
  
    handleNewData = (tour) => {
        /* this deals with all tour information */
-       var dbTourArray = this.state.tours;
-       var newDbTour = {tourId: tour.data().tourId,
-                   userEmail: tour.data().userEmail,
-                   location: tour.data().location,
-                   uploadDate: tour.data().uploadDate,
-                   videoUrl: tour.data().videoUrl,
-                   description: tour.data().description};
-       dbTourArray.push(newDbTour);
- 
-       /* this array is made specifically so it is compatible
-       with the select attribute & dropdowns */
-       var selectTourArray = this.state.selectDropdowns;
-       var newDropdownTour = {
-           label : tour.data().location,
-           value : "" + tour.data().tourId
-       };
-       selectTourArray.push(newDropdownTour);
-      
-       this.setState({
-           tours : dbTourArray,
-           isSearching: false,
-           selectDropdowns : selectTourArray
-       });
+       if(tour.exists) {
+            var dbTourArray = this.state.tours;
+            var newDbTour = {tourId: tour.data().tourId,
+                        userEmail: tour.data().userEmail,
+                        location: tour.data().location,
+                        uploadDate: tour.data().uploadDate,
+                        videoUrl: tour.data().videoUrl,
+                        description: tour.data().description};
+            dbTourArray.push(newDbTour);
+        
+            /* this array is made specifically so it is compatible
+            with the select attribute & dropdowns */
+            var selectTourArray = this.state.selectDropdowns;
+            var newDropdownTour = {
+                label : tour.data().location,
+                value : "" + tour.data().tourId
+            };
+            selectTourArray.push(newDropdownTour);
+            
+            this.setState({
+                tours : dbTourArray,
+                isSearching: false,
+                selectDropdowns : selectTourArray
+            });
+        }
    }
  
-   componentDidMount() {
+   async componentDidMount() {
        const firebase = require("firebase");
        const db = firebase.firestore();
        const toursDb = db.collection("Tours");
  
-       toursDb.get().then(snapshot => {
-           snapshot.forEach(doc => {
-               this.handleNewData(doc);
-           });
-       }).catch(function(error) {
-           console.log("Error getting document:", error);
-       });
+       if(toursDb !== undefined) {
+        await toursDb.get().then(snapshot => {
+            snapshot.forEach(doc => {
+                this.handleNewData(doc);
+            });
+        }).catch(function(error) {
+            console.log("Error getting document: ", error);
+        });
+       }
    }
   
    handleNavSearch = (toSearch) => {
@@ -81,33 +85,37 @@ export default class NavSearch extends React.Component {
   };
   
    render() {
-       const options = this.state.selectDropdowns;
-       return (
-           <div className="rowC">
-                <div id="container" style={{width: '200px'}}>
-                    {/* TODO: Implement at most 5 dropdowns & figure out text color */}
-                    <Select placeholder="Search..." 
-                        options={options}
-                        maxMenuHeight={190}
-                        onClick={this.handleNavSearch}
-                        onChange={this.handleSearchChange}
-                        theme={(theme) => ({
-                            ...theme,
-                            borderRadius: 10,
-                            colors: {
-                              primary25: 'lightgreen',
-                              primary: 'teal',
-                              text: 'black'
-                            },
-                        })}
-                    />
+       const options = (this.state.selectDropdowns !== undefined) ? this.state.selectDropdowns : null;
+       if(options !== null) {
+            return (
+                <div className="rowC">
+                    <div id="container" style={{width: '200px'}}>
+                        <Select placeholder="Search..." 
+                            options={options}
+                            maxMenuHeight={190}
+                            onClick={this.handleNavSearch}
+                            onChange={this.handleSearchChange}
+                                theme={(theme) => ({
+                                ...theme,
+                                borderRadius: 10,
+                                colors: {
+                                primary25: 'lightgreen',
+                                primary: 'teal',
+                                text: 'black'
+                                },
+                            })}
+                        />
+                    </div>
+                    {(this.state.currentTour !== undefined) ?
+                        <Link style={{ color: "inherit" }} to={{
+                            pathname: `/TourPage/${this.state.currentTour.tourId}`,
+                            state : this.state.currentTour}}>
+                            <Button style={{flex: 1}}>GO</Button>
+                        </Link> 
+                        : null
+                    }
                 </div>
-                <Link style={{ color: "inherit" }} to={{
-                    pathname: `/TourPage/${this.state.currentTour.tourId}`,
-                    state : this.state.currentTour}}>
-                    <Button style={{flex: 1}}>GO</Button>
-                </Link>
-            </div>
-       );
+            );
+        }
    }
 }
