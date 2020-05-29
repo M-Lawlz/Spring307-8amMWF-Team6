@@ -49,7 +49,7 @@ export default class TourPage extends React.Component {
 
     render() {
         const current = this.state.tours.find(x => {
-            return x.tourId === this.state.tourId
+            return x.tourId.toString() === this.state.tourId;
         });
         return (
 
