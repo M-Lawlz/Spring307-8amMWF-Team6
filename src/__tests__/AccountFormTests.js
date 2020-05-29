@@ -1,5 +1,4 @@
 import AccountForm from "../components/AccountForm";
-import Firebase from "firebase/app";
 import React from "react";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
