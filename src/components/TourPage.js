@@ -51,7 +51,7 @@ export default class TourPage extends React.Component {
         const current = this.state.tours.find(x => {
             /* NOTE: warning about double equals, but DO NOT change it
             since this is the only way it works */
-            return x.tourId == this.state.tourId
+            return x.tourId === this.state.tourId
         });
         return (
 

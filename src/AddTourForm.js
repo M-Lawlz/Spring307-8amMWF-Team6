@@ -1,8 +1,4 @@
-import React, { useState } from 'react'
-import App from "firebase/app";
-import "firebase/auth";
-import Form from "react-bootstrap/Form";
-
+import React  from 'react';
 
 class AddTourForm extends React.Component {
 
@@ -50,7 +46,7 @@ class AddTourForm extends React.Component {
     db.settings({
       timestampsInSnapshots: true
     }); 
-    const tourRef = db.collection("Tours").doc((this.state.currentTourValue + 1).toString()).set({
+    db.collection("Tours").doc((this.state.currentTourValue + 1).toString()).set({
       location: this.state.location,
       description: this.state.description,
       videoUrl: this.state.videoUrl,
