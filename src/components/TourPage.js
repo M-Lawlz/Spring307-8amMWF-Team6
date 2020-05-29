@@ -49,14 +49,12 @@ export default class TourPage extends React.Component {
 
     render() {
         const current = this.state.tours.find(x => {
-            /* NOTE: warning about double equals, but DO NOT change it
-            since this is the only way it works */
-            return x.tourId == this.state.tourId
+            return x.tourId.toString() === this.state.tourId;
         });
         return (
 
-            <div className="tourPage" class="row">
-                <div class="column">
+            <div className="tourPage">
+                <div>
                     {
                     (this.state.tourId !== undefined && current !== undefined) ?
                         <div>
@@ -71,7 +69,7 @@ export default class TourPage extends React.Component {
                         : null
                     }
                 </div>
-                <div class="column" className="centered">
+                <div className="centered">
                     <CommentMod tourId={this.state.tourId}/>
                 </div>
 

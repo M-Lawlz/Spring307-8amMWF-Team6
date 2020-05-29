@@ -1,17 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddTourForm renders successfully 1`] = `
-<form
-  onSubmit={[Function]}
->
+<form>
   <label>
     Tour Name
   </label>
   <input
     name="name"
-    onChange={[Function]}
     placeholder="Name of Tour"
-    required={true}
+    required=""
     type="text"
   />
   <label>
@@ -19,9 +16,8 @@ exports[`AddTourForm renders successfully 1`] = `
   </label>
   <input
     name="location"
-    onChange={[Function]}
     placeholder="Tour Location"
-    required={true}
+    required=""
     type="text"
     value=""
   />
@@ -30,9 +26,8 @@ exports[`AddTourForm renders successfully 1`] = `
   </label>
   <input
     name="description"
-    onChange={[Function]}
     placeholder="Tour Description"
-    required={true}
+    required=""
     type="text"
     value=""
   />
@@ -41,9 +36,8 @@ exports[`AddTourForm renders successfully 1`] = `
   </label>
   <input
     name="videoUrl"
-    onChange={[Function]}
     placeholder="Embed Link"
-    required={true}
+    required=""
     type="text"
     value=""
   />
@@ -52,9 +46,8 @@ exports[`AddTourForm renders successfully 1`] = `
   </label>
   <input
     name="uploadDate"
-    onChange={[Function]}
     placeholder="Current Date"
-    required={true}
+    required=""
     type="date"
     value=""
   />
