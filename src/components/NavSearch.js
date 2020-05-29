@@ -2,7 +2,7 @@ import React from 'react';
 import "firebase/firestore";
 import Button from '@material-ui/core/Button';
 import Select from 'react-select';
-import { Link } from "react-router-dom";
+import { HashRouter, Link } from "react-router-dom";
  
 export default class NavSearch extends React.Component {
    constructor(props) {
@@ -101,11 +101,13 @@ export default class NavSearch extends React.Component {
                         })}
                     />
                 </div>
-                <Link style={{ color: "inherit" }} to={{
-                    pathname: `/TourPage/${this.state.currentTour.tourId}`,
-                    state : this.state.currentTour}}>
-                    <Button style={{flex: 1}}>GO</Button>
-                </Link>
+                <HashRouter>
+                    <Link style={{ color: "inherit" }} to={{
+                        pathname: `/TourPage/${this.state.currentTour.tourId}`,
+                        state : this.state.currentTour}}>
+                        <Button style={{flex: 1}}>GO</Button>
+                    </Link>
+                </HashRouter>
             </div>
        );
    }

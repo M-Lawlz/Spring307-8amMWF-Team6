@@ -27,7 +27,7 @@ export default class CommentMod extends React.Component {
     
         toursDb.get().then(snapshot => {
             snapshot.forEach(doc => {
-                if(doc.data().tourId == this.state.tourId) {
+                if(doc.data().tourId === this.state.tourId) {
                     this.setState({
                         currentTourComments : doc.data().comments
                     });
