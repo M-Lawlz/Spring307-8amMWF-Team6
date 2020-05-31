@@ -44,6 +44,8 @@ export default class TourPage extends React.Component {
             snapshot.forEach(doc => {
                 this.handleNewData(doc);
             });
+        }).catch(function(error) {
+            alert("Error getting document: ", error);
         });
     }
 
@@ -52,7 +54,6 @@ export default class TourPage extends React.Component {
             return x.tourId.toString() === this.state.tourId;
         });
         return (
-
             <div className="tourPage">
                 <div>
                     {
@@ -72,7 +73,6 @@ export default class TourPage extends React.Component {
                 <div className="centered">
                     <CommentMod tourId={this.state.tourId}/>
                 </div>
-
             </div>
         )
     }

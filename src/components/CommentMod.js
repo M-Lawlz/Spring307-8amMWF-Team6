@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import Button from 'react-bootstrap/Button';
 import App from "firebase/app";
 
 export default class CommentMod extends React.Component {
@@ -27,12 +28,14 @@ export default class CommentMod extends React.Component {
     
         toursDb.get().then(snapshot => {
             snapshot.forEach(doc => {
-                if(doc.data().tourId === this.state.tourId) {
+                if(doc.data().tourId.toString() === this.state.tourId) {
                     this.setState({
                         currentTourComments : doc.data().comments
                     });
                 }
             });
+        }).catch(function(error) {
+            alert("Error getting document: ", error);
         });
     }
 
@@ -48,7 +51,7 @@ export default class CommentMod extends React.Component {
             }
           })
           .catch((error) => {
-            console.error("Error: ", error.message);
+            alert("Error: ", error.message);
           });
       };
 
@@ -80,6 +83,22 @@ export default class CommentMod extends React.Component {
         });
     }
 
+    deleteComment = (commentToDelete) => {
+        const firebase = require("firebase");
+        const db = firebase.firestore();
+        if(window.confirm("Are  you sure you want to delete comment: " + commentToDelete)) {
+            const updatedComs = this.state.currentTourComments
+            .filter(doc => doc.comment !== commentToDelete);
+            var docRef = db.collection("Tours").doc(this.state.tourId.toString());
+            docRef.update({
+                comments: updatedComs
+            });
+            this.setState({
+                currentTourComments : updatedComs
+            });
+        }
+    }
+
     render() {
         return (
             <div className="container">
@@ -96,8 +115,8 @@ export default class CommentMod extends React.Component {
                         required>
                         </TextField>
                         {this.state.user === null ? 
-                        <button type="submit" disabled>Login to Comment!</button> :
-                        <button type="submit">Post Comment!</button>}
+                        <Button type="submit" disabled>Login to Comment!</Button> :
+                        <Button type="submit" variant="success">Post Comment!</Button>}
                     </form>
                     <div>
                         {
@@ -114,6 +133,11 @@ export default class CommentMod extends React.Component {
                                                     {com.userName + ": "}
                                                 </b>
                                                 {com.comment + " "}
+                                                    {(this.state.userData != null &&
+                                                    com.userName === this.state.userData.username) ?
+                                                    <button style={{float: 'right'}}
+                                                    onClick={() => this.deleteComment(com.comment)}>X</button>
+                                                : null }
                                             </div>
                                             </span>
                                         </div>

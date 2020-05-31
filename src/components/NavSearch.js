@@ -53,6 +53,8 @@ export default class NavSearch extends React.Component {
            snapshot.forEach(doc => {
                this.handleNewData(doc);
            });
+       }).catch(function(error) {
+           console.log("Error getting document: ", error);
        });
    }
   
