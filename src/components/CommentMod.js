@@ -115,8 +115,8 @@ export default class CommentMod extends React.Component {
                         required>
                         </TextField>
                         {this.state.user === null ? 
-                        <Button type="submit" disabled>Login to Comment!</Button> :
-                        <Button type="submit" variant="success">Post Comment!</Button>}
+                        <button type="submit" disabled>Login to Comment!</button> :
+                        <button type="submit" variant="success">Post Comment!</button>}
                     </form>
                     <div>
                         {
