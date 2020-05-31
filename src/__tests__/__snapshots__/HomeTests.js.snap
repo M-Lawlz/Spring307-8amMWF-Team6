@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home renders successfully 1`] = `
+exports[`Home renders successfully. 1`] = `
 <h1>
   Welcome to SimTrek!
 </h1>

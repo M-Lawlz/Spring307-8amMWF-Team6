@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddTourForm renders successfully 1`] = `
+exports[`AddTourForm renders successfully. 1`] = `
 <form>
   <label>
     Tour Name
