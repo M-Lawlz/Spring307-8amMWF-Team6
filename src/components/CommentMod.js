@@ -58,8 +58,15 @@ export default class CommentMod extends React.Component {
         const firebase = require("firebase");
         const db = firebase.firestore();
         const currentTour = db.collection("Tours").doc(this.state.tourId.toString());
-        const timeRn = firebase.firestore.Timestamp.now().toDate();
 
+        var date = new Date();
+        var timeRn =
+            ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+            ("00" + date.getDate()).slice(-2) + "/" +
+            date.getFullYear() + " " +
+            ("00" + date.getHours()).slice(-2) + ":" +
+            ("00" + date.getMinutes()).slice(-2) + ":" +
+            ("00" + date.getSeconds()).slice(-2);
         /* TODO: Figure out timestamp printing issue, keeps thinking its 1972 */
         const newItem = {comment : this.state.newComment,
             userName : this.state.userData.username,
@@ -134,9 +141,13 @@ export default class CommentMod extends React.Component {
                                                 {com.comment + " "}
                                                 {(this.state.userData != null &&
                                                     com.userName === this.state.userData.username) ?
-                                                    <button style={{float: 'right'}}
+                                                    <button style={{float: 'right', color: 'red'}}
                                                     onClick={() => this.deleteComment(com.comment)}>X</button>
                                                 : null }
+                                                <br/>
+                                                <div className="commentDate">
+                                                {com.commentDate.toString()}
+                                                </div>
                                             </div>
                                             </span>
                                         </div>
