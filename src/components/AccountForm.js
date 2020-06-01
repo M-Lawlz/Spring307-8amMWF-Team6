@@ -1,6 +1,7 @@
 import App from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 import { Button, Dialog, DialogContent, DialogTitle } from "@material-ui/core";
 import { Form } from "react-bootstrap";
 import React from "react";
@@ -13,6 +14,8 @@ export default class AccountForm extends React.Component {
       input: "",
       inputType: "",
       open: props.isFormShowing ? true : false,
+      photo: null,
+      threwFileSizeError: false,
       user: null,
     };
   }
@@ -36,11 +39,23 @@ export default class AccountForm extends React.Component {
       case "password":
         this.setState({ inputType: "password", printType: "Password" });
         break;
+      case "profilePicture":
+        this.setState({ inputType: "file", printType: "Profile Picture" });
+        break;
+      case "coverPhoto":
+        this.setState({ inputType: "file", printType: "Cover Photo" });
+        break;
       default:
     }
   }
 
   attemptUpdate = () => {
+    const coverPhotoRef = App.storage().ref(
+      "/coverPhotos/" + this.state.user.email + "COVER.jpg"
+    );
+    const profilePictureRef = App.storage().ref(
+      "/profilePictures/" + this.state.user.email + ".jpg"
+    );
     const userDoc = App.firestore()
       .collection("users")
       .doc(this.state.user.email);
@@ -64,6 +79,16 @@ export default class AccountForm extends React.Component {
         .updatePassword(this.state.input)
         .then(this.closeForm)
         .catch(this.handleError);
+    } else if (this.state.formType === "profilePicture") {
+      profilePictureRef
+        .put(this.state.photo)
+        .then(this.closeForm)
+        .catch(this.handleError);
+    } else if (this.state.formType === "coverPhoto") {
+      coverPhotoRef
+        .put(this.state.photo)
+        .then(this.closeForm)
+        .catch(this.handleError);
     }
   };
 
@@ -75,7 +100,12 @@ export default class AccountForm extends React.Component {
   closeForm = () => {
     this.setState({ open: false });
     this.props.isFormShowing(false);
-    alert(`Your account information has been updated.`);
+    if (this.state.photo) {
+      alert("Your photo has been uploaded.");
+      this.setState({ photo: null });
+    } else {
+      alert("Your account information has been updated.");
+    }
   };
 
   handleError = (error) => {
@@ -86,9 +116,31 @@ export default class AccountForm extends React.Component {
     this.setState({ input: input.target.value });
   };
 
+  onFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (this.validatePhotoSize(event)) {
+      this.setState({ photo: file });
+    }
+  };
+
   submitForm = (event) => {
     event.preventDefault();
-    this.attemptUpdate();
+    if (this.state.threwFileSizeError === true) {
+      alert("Error: Please upload a smaller file (under 500 KB).");
+    } else {
+      this.attemptUpdate();
+    }
+  };
+
+  validatePhotoSize = (event) => {
+    const file = event.target.files[0];
+    const sizeLimit = 500000;
+    if (file.size > sizeLimit) {
+      alert("Error: Please upload a smaller file (under 500 KB).");
+      this.setState({ threwFileSizeError: true });
+      return false;
+    }
+    return true;
   };
 
   render() {
@@ -106,19 +158,29 @@ export default class AccountForm extends React.Component {
           </DialogTitle>
           <DialogContent>
             <Form onSubmit={this.submitForm}>
-              <Form.Text>{"Please enter your new information."}</Form.Text>
+              <Form.Text>
+                {this.state.inputType === "file"
+                  ? "Upload a new photo for yourself!"
+                  : "Please enter your new information."}
+              </Form.Text>
               <br />
               <br />
-              <Form.Group controlId={"formField"}>
-                <Form.Control
-                  name={"formField"}
-                  onInput={this.handleInput}
-                  placeholder={this.state.printType}
-                  required
-                  type={this.state.inputType}
-                  value={this.state.input}
-                />
-              </Form.Group>
+              {this.state.inputType === "file" ? (
+                <Form.File id="formcheck-api-regular">
+                  <Form.File.Input onChange={this.onFileUpload} />
+                </Form.File>
+              ) : (
+                <Form.Group controlId={"formField"}>
+                  <Form.Control
+                    name={"formField"}
+                    onInput={this.handleInput}
+                    placeholder={this.state.printType}
+                    required
+                    type={this.state.inputType}
+                    value={this.state.input}
+                  />
+                </Form.Group>
+              )}
               <br />
               <Button color={"primary"} onClick={this.cancelForm}>
                 Cancel
