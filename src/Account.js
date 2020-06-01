@@ -1,6 +1,6 @@
 import AccountForm from "./components/AccountForm";
 import App from "firebase/app";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, CardMedia } from "@material-ui/core";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
@@ -11,10 +11,14 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      coverPhoto: null,
+      isChangingCoverPhoto: false,
       isChangingEmail: false,
       isChangingFirstName: false,
       isChangingLastName: false,
       isChangingPassword: false,
+      isChangingProfilePicture: false,
+      profilePicture: null,
       sidebarOpen: false,
       user: null,
       userData: null,
@@ -27,9 +31,14 @@ export default class extends React.Component {
         this.setState({ user: user });
         this.fetchUserInfo();
         this.fetchProfilePicture();
+        this.fetchCoverPhoto();
       }
     });
   }
+
+  coverPhotoClicked = (newVal) => {
+    this.setState({ isChangingCoverPhoto: newVal });
+  };
 
   emailClicked = (newVal) => {
     this.setState({ isChangingEmail: newVal });
@@ -46,11 +55,20 @@ export default class extends React.Component {
       );
   }
 
-  fetchUserInfo = () => {
+  async fetchCoverPhoto() {
+    const coverPhotoRef = App.storage().ref(
+      "/coverPhotos/" + this.state.user.email + "COVER.jpg"
+    );
+    await coverPhotoRef.getDownloadURL().then((coverPhotoURL) => {
+      this.setState({ coverPhoto: { uri: coverPhotoURL } });
+    });
+  }
+
+  async fetchUserInfo() {
     const userDoc = App.firestore()
       .collection("users")
       .doc(this.state.user.email);
-    userDoc
+    await userDoc
       .get()
       .then((doc) => {
         if (doc.exists) {
@@ -60,7 +78,7 @@ export default class extends React.Component {
       .catch((error) => {
         console.error("Error: ", error.message);
       });
-  };
+  }
 
   firstNameClicked = (newVal) => {
     this.setState({ isChangingFirstName: newVal });
@@ -72,6 +90,10 @@ export default class extends React.Component {
 
   passwordClicked = (newVal) => {
     this.setState({ isChangingPassword: newVal });
+  };
+
+  profilePictureClicked = (newVal) => {
+    this.setState({ isChangingProfilePicture: newVal });
   };
 
   setSidebarStatus = () => {
@@ -119,6 +141,18 @@ export default class extends React.Component {
                 >
                   Change Password
                 </Button>
+                <Button
+                  onClick={this.profilePictureClicked}
+                  style={styles.sidebarButton}
+                >
+                  Change Profile Picture
+                </Button>
+                <Button
+                  onClick={this.coverPhotoClicked}
+                  style={styles.sidebarButton}
+                >
+                  Change Cover Photo
+                </Button>
               </div>
             }
             styles={{
@@ -148,6 +182,18 @@ export default class extends React.Component {
               isFormShowing={this.passwordClicked}
             />
           ) : null}
+          {this.state.isChangingProfilePicture ? (
+            <AccountForm
+              formType={"profilePicture"}
+              isFormShowing={this.profilePictureClicked}
+            />
+          ) : null}
+          {this.state.isChangingCoverPhoto ? (
+            <AccountForm
+              formType={"coverPhoto"}
+              isFormShowing={this.coverPhotoClicked}
+            />
+          ) : null}
           <div
             class={"centered"}
             style={{ flexDirection: "column", marginTop: 20 }}
@@ -156,7 +202,11 @@ export default class extends React.Component {
               src={
                 this.state.profilePicture ? this.state.profilePicture.uri : null
               }
-              style={{ height: 200, width: 200 }}
+              style={{ height: 200, position: "absolute", top: 170, width: 200 }}
+            />
+            <CardMedia
+              image={this.state.coverPhoto ? this.state.coverPhoto.uri : null}
+              style={{ height: 300, width: 800, borderRadius: 5 }}
             />
             <h1>Hi there, {this.state.userData.firstName}.</h1>
             <h2>
