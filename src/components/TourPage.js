@@ -74,15 +74,16 @@ export default class TourPage extends React.Component {
         };
 
 
-        deleteTour = e => {
+    deleteTour = e => {
             e.preventDefault();
             const firebase = require("firebase");
             const db = firebase.firestore();
             db.settings({
               timestampsInSnapshots: true
           }); 
-            db.collection("Tours").doc((this.state.tourId).toString()).delete()
+            db.collection("Tours").doc((this.state.tourId).toString()).delete();
         };
+
 
         componentWillReceiveProps() {
         /* reloads the page for new search queries, despite
@@ -175,9 +176,10 @@ export default class TourPage extends React.Component {
                 value={this.state.location}/>
                 <button type="submit"disabled={this.state.user===null || current.userEmail !==this.state.user.email}>Edit Tour</button>  
                 
-                </form>                
+                </form>       
+               
+                <form onSubmit={this.deleteTour}>         
                 <button type="submit" disabled={this.state.user===null || current.userEmail !==this.state.user.email}>Delete Tour</button>
-                <form onSubmit={this.deleteTour}>
                 </form>
 
                 </div> 

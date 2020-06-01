@@ -11,6 +11,7 @@ class AddTourForm extends React.Component {
       uploadDate: "",
       videoUrl: "",
       description: "",
+      username:"",
       comments:[],
       currentTourValue: 0
     }
@@ -124,6 +125,7 @@ class AddTourForm extends React.Component {
       onChange={this.updateInput} 
       value={this.state.userEmail}/>
 
+      
    
       <button type="submit">Add Tour</button>  
       </form>
