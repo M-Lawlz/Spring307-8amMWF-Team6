@@ -11,6 +11,7 @@ class AddTourForm extends React.Component {
       uploadDate: "",
       videoUrl: "",
       description: "",
+      comments:[],
       currentTourValue: 0
     }
   }
@@ -51,6 +52,8 @@ class AddTourForm extends React.Component {
       description: this.state.description,
       videoUrl: this.state.videoUrl,
       uploadDate: this.state.uploadDate,
+      userEmail: this.state.userEmail,
+      comments:[],
       tourId: this.state.currentTourValue + 1
     });
 
@@ -61,14 +64,19 @@ class AddTourForm extends React.Component {
       uploadDate: "",
       videoUrl: "",
       description: "",
+      comments:[],
       currentTourValue : this.state.currentTourValue + 1
     });
   };
 
   render(){
     return (
+      
+      <section>
       <form onSubmit={this.addTour}>
       
+
+     
       <label>Tour Name</label>
       <input type="text" 
       name="name" 
@@ -76,7 +84,6 @@ class AddTourForm extends React.Component {
       required
       onChange={this.updateInput}
       />
-      
       <label>Location</label>
       <input type="text" 
       name="location" 
@@ -108,9 +115,21 @@ class AddTourForm extends React.Component {
       required
       onChange={this.updateInput} 
       value={this.state.uploadDate}/>
-      
+
+      <label>Email</label>
+      <input type="text" 
+      name="userEmail" 
+      placeholder="email"
+      required
+      onChange={this.updateInput} 
+      value={this.state.userEmail}/>
+
+   
       <button type="submit">Add Tour</button>  
       </form>
+      
+      </section>
+
       )
 
 
