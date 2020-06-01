@@ -43,16 +43,6 @@ exports[`AddTourForm renders successfully. 1`] = `
       value=""
     />
     <label>
-      Upload Date
-    </label>
-    <input
-      name="uploadDate"
-      placeholder="Current Date"
-      required=""
-      type="date"
-      value=""
-    />
-    <label>
       Email
     </label>
     <input
@@ -63,6 +53,7 @@ exports[`AddTourForm renders successfully. 1`] = `
       value=""
     />
     <button
+      disabled=""
       type="submit"
     >
       Add Tour

@@ -94,3 +94,14 @@ footer {
 .commentSection {
   border: #fff;
 }
+
+#myBox {
+  background-color: white;
+  border : 3px solid rgb(0, 206, 209);
+  margin: 30px;
+  padding: 10px;
+}
+
+.commentDate {
+  font-size: 12px;
+}
