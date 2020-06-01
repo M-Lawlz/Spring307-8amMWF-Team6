@@ -1,60 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddTourForm renders successfully. 1`] = `
-<form>
-  <label>
-    Tour Name
-  </label>
-  <input
-    name="name"
-    placeholder="Name of Tour"
-    required=""
-    type="text"
-  />
-  <label>
-    Location
-  </label>
-  <input
-    name="location"
-    placeholder="Tour Location"
-    required=""
-    type="text"
-    value=""
-  />
-  <label>
-    Description
-  </label>
-  <input
-    name="description"
-    placeholder="Tour Description"
-    required=""
-    type="text"
-    value=""
-  />
-  <label>
-    Embed Url
-  </label>
-  <input
-    name="videoUrl"
-    placeholder="Embed Link"
-    required=""
-    type="text"
-    value=""
-  />
-  <label>
-    Upload Date
-  </label>
-  <input
-    name="uploadDate"
-    placeholder="Current Date"
-    required=""
-    type="date"
-    value=""
-  />
-  <button
-    type="submit"
-  >
-    Add Tour
-  </button>
-</form>
+<section>
+  <form>
+    <label>
+      Tour Name
+    </label>
+    <input
+      name="name"
+      placeholder="Name of Tour"
+      required=""
+      type="text"
+    />
+    <label>
+      Location
+    </label>
+    <input
+      name="location"
+      placeholder="Tour Location"
+      required=""
+      type="text"
+      value=""
+    />
+    <label>
+      Description
+    </label>
+    <input
+      name="description"
+      placeholder="Tour Description"
+      required=""
+      type="text"
+      value=""
+    />
+    <label>
+      Embed Url
+    </label>
+    <input
+      name="videoUrl"
+      placeholder="Embed Link"
+      required=""
+      type="text"
+      value=""
+    />
+    <label>
+      Upload Date
+    </label>
+    <input
+      name="uploadDate"
+      placeholder="Current Date"
+      required=""
+      type="date"
+      value=""
+    />
+    <label>
+      Email
+    </label>
+    <input
+      name="userEmail"
+      placeholder="email"
+      required=""
+      type="text"
+      value=""
+    />
+    <button
+      type="submit"
+    >
+      Add Tour
+    </button>
+  </form>
+</section>
 `;
