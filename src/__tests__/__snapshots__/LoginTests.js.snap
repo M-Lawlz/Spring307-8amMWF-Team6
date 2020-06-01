@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login renders successfully 1`] = `
+exports[`Login renders successfully. 1`] = `
 <WithStyles(ForwardRef(Dialog))
   autoDetectWindowHeight={true}
   autoScrollBodyContent={true}

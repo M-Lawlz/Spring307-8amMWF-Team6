@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Account renders successfully 1`] = `""`;
+exports[`Account renders successfully. 1`] = `""`;
+
+exports[`AccountForm renders successfully. 1`] = `""`;

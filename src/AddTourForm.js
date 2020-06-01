@@ -31,6 +31,8 @@ class AddTourForm extends React.Component {
                 });
             }
         });
+    }).catch((error) => {
+      console.error("Error: " + error.message);
     });
   }
 
