@@ -1,6 +1,7 @@
 import React from "react";
 import ReactPlayer from "react-player";
 import CommentMod from "./CommentMod";
+import RateSystem from "./RateSystem";
 import App from "firebase/app";
 
 export default class TourPage extends React.Component {
@@ -170,11 +171,12 @@ export default class TourPage extends React.Component {
                     <b>Upload Date:</b> {current.uploadDate}
                   </span>
                 </div>
+                <RateSystem></RateSystem>
                 <div class="column"></div>
               </div>
               <br/>
               {
-              (!this.state.userData &&
+              (this.state.userData &&
                   current.uploaderUsername === this.state.userData.username) ?
                 <div className="centered" id="editBox">
                     <div class="row">
