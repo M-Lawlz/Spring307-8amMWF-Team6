@@ -174,7 +174,7 @@ export default class TourPage extends React.Component {
               </div>
               <br/>
               {
-              (this.state.userData !== null &&
+              (!this.state.userData &&
                   current.uploaderUsername === this.state.userData.username) ?
                 <div className="centered" id="editBox">
                     <div class="row">
@@ -194,7 +194,7 @@ export default class TourPage extends React.Component {
                         type="submit"
                         disabled={
                             this.state.editedDesc.length === 0 ||
-                            this.state.user === null ||
+                            !this.state.user ||
                             current.userEmail !== this.state.user.email
                         }
                         >
@@ -205,7 +205,7 @@ export default class TourPage extends React.Component {
                         <button
                         type="submit"
                         disabled={
-                            this.state.user === null
+                            !this.state.user
                         }
                         >
                         Delete Tour
