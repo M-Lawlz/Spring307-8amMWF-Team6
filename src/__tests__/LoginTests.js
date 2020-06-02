@@ -72,7 +72,7 @@ test("Sends password reset email correctly.", () => {
 
 test("Toggles forgot password screen correctly.", () => {
   const login = shallow(<Login />);
-  login.setState({isForgotPassword: false});
+  login.setState({ isForgotPassword: false });
   const instance = login.instance();
   instance.toggleForgotPassword();
   expect(instance.state.isForgotPassword).toBe(true);

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const TourSample = () => (
   <table>
@@ -12,7 +12,7 @@ const TourSample = () => (
     <tbody>
       <tr>
         <td>TourName data</td>
-         <td>Location data</td>
+        <td>Location data</td>
         <td>Description data</td>
         <td>Embed Url</td>
         <td>
@@ -23,6 +23,6 @@ const TourSample = () => (
       </tr>
     </tbody>
   </table>
-)
+);
 
-export default TourSample
+export default TourSample;

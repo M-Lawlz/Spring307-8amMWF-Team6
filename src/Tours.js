@@ -5,86 +5,65 @@ import { Link } from "react-router-dom";
 
 export default class Tours extends React.Component {
   constructor(props) {
+    super(props);
 
-   super(props);
+    this.state = {
+      tours: [],
+      tourId: "",
+    };
+  }
 
+  handleNewData = (tour) => {
+    var dbTourArray = this.state.tours;
+    var newDbTour = {
+      tourId: tour.data().tourId,
+      userEmail: tour.data().userEmail,
+      location: tour.data().location,
+      uploadDate: tour.data().uploadDate,
+      videoUrl: tour.data().videoUrl,
+      description: tour.data().description,
+    };
+    dbTourArray.push(newDbTour);
+    this.setState({
+      tours: dbTourArray,
+    });
+  };
 
-   this.state = {
-     tours : [],
-     tourId: ""
-   }
- }
+  componentDidMount() {
+    const firebase = require("firebase");
+    const db = firebase.firestore();
+    const toursDb = db.collection("Tours");
 
- handleNewData = (tour) => {
-   var dbTourArray = this.state.tours;
-   var newDbTour = {tourId: tour.data().tourId,
-     userEmail: tour.data().userEmail,
-     location: tour.data().location,
-     uploadDate: tour.data().uploadDate,
-     videoUrl: tour.data().videoUrl,
-     description: tour.data().description};
-     dbTourArray.push(newDbTour);
-     this.setState({
+    toursDb.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        this.handleNewData(doc);
+      });
+    });
+  }
 
-       tours : dbTourArray
-       
-     });
-   }
-
-   componentDidMount() {
-
-     const firebase = require("firebase");
-     const db = firebase.firestore();
-     const toursDb = db.collection("Tours");
-
-     toursDb.get().then(snapshot => {
-       snapshot.forEach(doc => {
-         this.handleNewData(doc);
-       });
-     });
-   }
-   
-
-
-
-   render() {
-
-     return (
-
+  render() {
+    return (
       <div>
-      <h1> View Tours </h1>
+        <h1> View Tours </h1>
 
-      <p>{this.state.tours.map(tour => 
+        <p>
+          {this.state.tours.map((tour) => (
+            <article class="media content-section">
+              <div class="media-body">
+                <h3 class="media-heading">
+                  <Link to={"TourPage/" + tour.tourId}>{tour.location}</Link>
+                </h3>
 
-         <article class="media content-section">
-      
-        <div class="media-body">
-
-       <h3 class="media-heading">
-       <Link to={'TourPage/'+tour.tourId}>{tour.location}</Link>    
-       </h3>
-
-       <p>{tour.description}</p>
-       <p>{tour.uploadDate.toString()}</p>
-       <div class="centered">
-       <ReactPlayer url={tour.videoUrl} controls/>
-       </div>
-       
-       </div>
-</article>
-       )
-     }</p>
-
-     </div>
-     
-
-
-     ) 
-   }
-
- }
-
-
-
-
-
+                <p>{tour.description}</p>
+                <p>{tour.uploadDate.toString()}</p>
+                <div class="centered">
+                  <ReactPlayer url={tour.videoUrl} controls />
+                </div>
+              </div>
+            </article>
+          ))}
+        </p>
+      </div>
+    );
+  }
+}

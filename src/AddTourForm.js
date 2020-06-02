@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import App from "firebase/app";
 
 class AddTourForm extends React.Component {
@@ -11,12 +11,12 @@ class AddTourForm extends React.Component {
       uploadDate: "",
       videoUrl: "",
       description: "",
-      username:"",
-      comments:[],
+      username: "",
+      comments: [],
       currentTourValue: 0,
-      user : null,
-      userData : null
-    }
+      user: null,
+      userData: null,
+    };
   }
 
   async componentDidMount() {
@@ -30,17 +30,20 @@ class AddTourForm extends React.Component {
     const db = firebase.firestore();
     const toursDb = db.collection("Tours");
 
-    toursDb.get().then(snapshot => {
-        snapshot.forEach(doc => {
-            if(doc.data().tourId > this.state.currentTourValue) {
-                this.setState({
-                    currentTourValue : doc.data().tourId
-                });
-            }
+    toursDb
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          if (doc.data().tourId > this.state.currentTourValue) {
+            this.setState({
+              currentTourValue: doc.data().tourId,
+            });
+          }
         });
-    }).catch((error) => {
-      console.error("Error: " + error.message);
-    });
+      })
+      .catch((error) => {
+        console.error("Error: " + error.message);
+      });
   }
 
   fetchUserInfo = () => {
@@ -52,7 +55,7 @@ class AddTourForm extends React.Component {
       .then((doc) => {
         if (doc.exists) {
           console.log("FETCHING DATA");
-          this.setState({userData: doc.data()});
+          this.setState({ userData: doc.data() });
         }
       })
       .catch((error) => {
@@ -60,34 +63,38 @@ class AddTourForm extends React.Component {
       });
   };
 
-  updateInput = e => {
+  updateInput = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  addTour = e => {
+  addTour = (e) => {
     e.preventDefault();
     const firebase = require("firebase");
     const db = firebase.firestore();
     db.settings({
-      timestampsInSnapshots: true
-    }); 
+      timestampsInSnapshots: true,
+    });
     var date = new Date();
     var timeRn =
-            ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
-            ("00" + date.getDate()).slice(-2) + "/" +
-            date.getFullYear();
-    db.collection("Tours").doc((this.state.currentTourValue + 1).toString()).set({
-      location: this.state.location,
-      description: this.state.description,
-      videoUrl: this.state.videoUrl,
-      uploadDate: timeRn,
-      userEmail: this.state.userData.email,
-      uploaderUsername: this.state.userData.username,
-      comments: [],
-      tourId: this.state.currentTourValue + 1
-    });
+      ("00" + (date.getMonth() + 1)).slice(-2) +
+      "/" +
+      ("00" + date.getDate()).slice(-2) +
+      "/" +
+      date.getFullYear();
+    db.collection("Tours")
+      .doc((this.state.currentTourValue + 1).toString())
+      .set({
+        location: this.state.location,
+        description: this.state.description,
+        videoUrl: this.state.videoUrl,
+        uploadDate: timeRn,
+        userEmail: this.state.userData.email,
+        uploaderUsername: this.state.userData.username,
+        comments: [],
+        tourId: this.state.currentTourValue + 1,
+      });
 
     this.setState({
       tourId: "",
@@ -96,61 +103,70 @@ class AddTourForm extends React.Component {
       uploadDate: "",
       videoUrl: "",
       description: "",
-      comments:[],
-      currentTourValue : this.state.currentTourValue + 1
+      comments: [],
+      currentTourValue: this.state.currentTourValue + 1,
     });
   };
 
-  render(){
+  render() {
     return (
-      
       <section>
         <form onSubmit={this.addTour}>
-      
-        <label>Tour Name</label>
-        <input type="text" 
-        name="name" 
-        placeholder="Name of Tour" 
-        required
-        onChange={this.updateInput}
-        />
-        <label>Location</label>
-        <input type="text" 
-        name="location" 
-        placeholder="Tour Location"
-        required
-        onChange={this.updateInput}
-        value={this.state.location}/>
-        
-        <label>Description</label>
-        <input type="text" 
-        name="description"
-        placeholder="Tour Description" 
-        required
-        onChange={this.updateInput} 
-        value={this.state.description}/>
-        
-        <label>Embed Url</label>
-        <input type="text" 
-        name="videoUrl" 
-        placeholder="Embed Link"
-        required
-        onChange={this.updateInput} 
-        value={this.state.videoUrl}/>
+          <label>Tour Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name of Tour"
+            required
+            onChange={this.updateInput}
+          />
+          <label>Location</label>
+          <input
+            type="text"
+            name="location"
+            placeholder="Tour Location"
+            required
+            onChange={this.updateInput}
+            value={this.state.location}
+          />
 
-        <label>Email</label>
-        <input type="text" 
-        name="userEmail" 
-        placeholder="email"
-        required
-        onChange={this.updateInput} 
-        value={this.state.userEmail}/>
-        
-        <button type="submit" disabled={this.state.userData === null}>Add Tour</button>  
+          <label>Description</label>
+          <input
+            type="text"
+            name="description"
+            placeholder="Tour Description"
+            required
+            onChange={this.updateInput}
+            value={this.state.description}
+          />
+
+          <label>Embed Url</label>
+          <input
+            type="text"
+            name="videoUrl"
+            placeholder="Embed Link"
+            required
+            onChange={this.updateInput}
+            value={this.state.videoUrl}
+          />
+
+          <label>Email</label>
+          <input
+            type="text"
+            name="userEmail"
+            placeholder="email"
+            required
+            onChange={this.updateInput}
+            value={this.state.userEmail}
+          />
+
+          <button type="submit" disabled={this.state.userData === null}>
+            Add Tour
+          </button>
         </form>
       </section>
+    );
+  }
+}
 
-      )
-  }}
-
-export default AddTourForm
+export default AddTourForm;

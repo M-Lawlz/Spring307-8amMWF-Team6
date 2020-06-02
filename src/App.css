@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  height:auto;
-  min-height:100%;
+  height: auto;
+  min-height: 100%;
   background-color: lightgray;
   overflow: show;
 }
@@ -45,7 +45,10 @@
   padding-left: 265px;
 }
 
-.rowC{display:flex; flex-direction:row;}
+.rowC {
+  display: flex;
+  flex-direction: row;
+}
 
 .centered {
   display: flex;
@@ -54,7 +57,7 @@
 }
 
 footer {
-  box-shadow: 0 50vh 0 50vh #D3D3D3;
+  box-shadow: 0 50vh 0 50vh #d3d3d3;
   min-height: 1vh;
 }
 
@@ -74,7 +77,7 @@ footer {
   /* max-width: 35rem; */
   width: 25rem;
   color: #fff;
-  background-color: #55B914;
+  background-color: #55b914;
   border-radius: 72px;
   padding: 10px 50px 10px;
 }
@@ -84,7 +87,7 @@ footer {
   border-radius: 4px;
   /* could use this to expand & put comments under */
   margin-bottom: 20px;
-  padding: 10px;  
+  padding: 10px;
 }
 
 .commentText {
@@ -97,7 +100,7 @@ footer {
 
 #myBox {
   background-color: white;
-  border : 3px solid rgb(0, 206, 209);
+  border: 3px solid rgb(0, 206, 209);
   margin: 30px;
   padding: 10px;
 }

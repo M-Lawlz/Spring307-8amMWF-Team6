@@ -95,15 +95,17 @@ export default class NavBar extends React.Component {
                 </Link>
 
                 <Link style={{ color: "inherit" }} to={"/UploadTour"}>
-                  <Button color={"inherit"} style={{ marginLeft: 35, width: 100}}>
+                  <Button
+                    color={"inherit"}
+                    style={{ marginLeft: 35, width: 100 }}
+                  >
                     <h3>Upload a Tour</h3>
                   </Button>
                 </Link>
 
                 <div className="tab">
-                  <NavSearch/>
+                  <NavSearch />
                 </div>
-
               </HashRouter>
               <Grid
                 container
@@ -131,10 +133,7 @@ export default class NavBar extends React.Component {
                       style={{ color: "inherit", marginRight: 20 }}
                       to={"/Account"}
                     >
-                      <Button
-                        color={"inherit"}
-                        variant={"outlined"}
-                      >
+                      <Button color={"inherit"} variant={"outlined"}>
                         <em>Account</em>
                       </Button>
                     </Link>
