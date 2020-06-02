@@ -11,10 +11,10 @@ export default class TourPage extends React.Component {
       user: null,
       userData: null,
       userEmail: "",
-      currentTour: [],
       tourId: this.props.location.pathname.substring(
         this.props.location.pathname.lastIndexOf("/") + 1
       ),
+      editedDesc: ""
     };
   }
 
@@ -37,7 +37,7 @@ export default class TourPage extends React.Component {
 
   updateInput = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      editedDesc: e.target.value,
     });
   };
 
@@ -46,39 +46,26 @@ export default class TourPage extends React.Component {
     const firebase = require("firebase");
     const db = firebase.firestore();
     db.settings({
-      timestampsInSnapshots: true,
+        timestampsInSnapshots: true,
     });
     const current = this.state.tours.find((x) => {
       return x.tourId.toString() === this.state.tourId;
     });
-
     db.collection("Tours").doc(this.state.tourId.toString()).update({
-      location: this.state.location,
-      description: this.state.description,
+      location: current.location,
+      description: this.state.editedDesc,
       tourId: current.tourId,
       uploadDate: current.uploadDate,
       videoUrl: current.videoUrl,
       userEmail: current.userEmail,
+    }).then((info) => {
+        alert("Description successfully updated!");
+    }).catch(function(error) {
+        console.log("Error with updating database! "  + error);
     });
     this.setState({
-      tourId: "",
-      userEmail: "",
-      location: "",
-      uploadDate: "",
-      videoUrl: "",
-      description: "",
-      comments: [],
+        editedDesc: ""
     });
-  };
-
-  deleteTour = (e) => {
-    e.preventDefault();
-    const firebase = require("firebase");
-    const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true,
-    });
-    db.collection("Tours").doc(this.state.tourId.toString()).delete();
   };
 
   componentWillReceiveProps() {
@@ -131,6 +118,21 @@ export default class TourPage extends React.Component {
       });
   };
 
+  deleteTour = (e) => {
+    // e.preventDefault();
+    const firebase = require("firebase");
+    const db = firebase.firestore();
+    if(window.confirm("Are you sure you want to delete this tour?")) {
+        db.collection("Tours").doc(this.state.tourId.toString())
+        .delete().then((info) => {
+            alert("Tour was successfully deleted!");
+            window.location.reload(true);
+        }).catch(function(error) {
+            console.log("Error with deleting tour! "  + error);
+        });
+    }
+  };
+
   render() {
     const current = this.state.tours.find((x) => {
       return x.tourId.toString() === this.state.tourId;
@@ -148,7 +150,7 @@ export default class TourPage extends React.Component {
                 <div class="column">
                   <ReactPlayer url={current.videoUrl} controls />
                 </div>
-                <div class="column" id="myBox">
+                <div class="column" id="descBox">
                   <span>
                     <b>Uploaded By:</b> {current.uploaderUsername}
                   </span>
@@ -170,50 +172,47 @@ export default class TourPage extends React.Component {
                 </div>
                 <div class="column"></div>
               </div>
-              <h2>{current.description}</h2>
-              <p>Please log in to edit your tour</p>
-
-              <form onSubmit={this.editTour}>
-                <label>Edit Description</label>
-                <input
-                  type="textarea"
-                  name="description"
-                  placeholder="Tour Description"
-                  required
-                  onChange={this.updateInput}
-                  value={this.state.description}
-                />
-
-                <label>Edit Location</label>
-                <input
-                  type="text"
-                  name="location"
-                  placeholder="Tour Location"
-                  required
-                  onChange={this.updateInput}
-                  value={this.state.location}
-                />
-                <button
-                  type="submit"
-                  disabled={
-                    this.state.user === null ||
-                    current.userEmail !== this.state.user.email
-                  }
-                >
-                  Edit Tour
-                </button>
-              </form>
-              <form onSubmit={this.deleteTour}>
-                <button
-                  type="submit"
-                  disabled={
-                    this.state.user === null ||
-                    current.userEmail !== this.state.user.email
-                  }
-                >
-                  Delete Tour
-                </button>
-              </form>
+              <br/>
+              {
+              (this.state.userData !== null &&
+                  current.uploaderUsername === this.state.userData.username) ?
+                <div className="centered" id="editBox">
+                    <div class="row">
+                        <h2>Edit your tour information!</h2>
+                    </div>
+                    <form onSubmit={this.editTour}>
+                        <label>Edit Description</label>
+                        <input
+                        type="textarea"
+                        name="description"
+                        placeholder="Tour Description"
+                        onChange={this.updateInput}
+                        value={this.state.editedDesc}
+                        />
+                        <br/>
+                        <button
+                        type="submit"
+                        disabled={
+                            this.state.editedDesc.length === 0 ||
+                            this.state.user === null ||
+                            current.userEmail !== this.state.user.email
+                        }
+                        >
+                        Edit Tour
+                        </button>
+                    </form>
+                    <form onSubmit={this.deleteTour}>
+                        <button
+                        type="submit"
+                        disabled={
+                            this.state.user === null
+                        }
+                        >
+                        Delete Tour
+                        </button>
+                    </form>
+                </div> : null
+              }
             </div>
           ) : null}
         </div>
