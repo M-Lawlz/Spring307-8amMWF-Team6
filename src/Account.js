@@ -202,7 +202,12 @@ export default class extends React.Component {
               src={
                 this.state.profilePicture ? this.state.profilePicture.uri : null
               }
-              style={{ height: 200, position: "absolute", top: 170, width: 200 }}
+              style={{
+                height: 200,
+                position: "absolute",
+                top: 170,
+                width: 200,
+              }}
             />
             <CardMedia
               image={this.state.coverPhoto ? this.state.coverPhoto.uri : null}

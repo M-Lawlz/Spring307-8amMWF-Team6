@@ -45,7 +45,7 @@ export default class Login extends React.Component {
   finishResetPassword = () => {
     alert("Password reset email sent!");
     this.toggleForgotPassword();
-  }
+  };
 
   handleEmailInput = (email) => {
     this.setState({ email: email.target.value });
@@ -78,7 +78,7 @@ export default class Login extends React.Component {
     } else {
       this.attemptLogin();
     }
-  }
+  };
 
   toggleForgotPassword = () => {
     this.setState({
@@ -101,10 +101,7 @@ export default class Login extends React.Component {
             Forgot Password
           </DialogTitle>
           <DialogContent>
-            <Form
-              onSubmit={this.submitForm}
-              validated={this.state.validated}
-            >
+            <Form onSubmit={this.submitForm} validated={this.state.validated}>
               <Form.Text>
                 If you've forgotten your password, please enter your email
                 below. If it exists in our system, you'll receive an email with
@@ -147,10 +144,7 @@ export default class Login extends React.Component {
         >
           <DialogTitle style={{ textAlign: "center" }}>Log In</DialogTitle>
           <DialogContent>
-            <Form
-              onSubmit={this.submitForm}
-              validated={this.state.validated}
-            >
+            <Form onSubmit={this.submitForm} validated={this.state.validated}>
               <Form.Label>Email</Form.Label>
               <Form.Group controlId={"formEmail"}>
                 <Form.Control
