@@ -148,7 +148,7 @@ class AddTourForm extends React.Component {
         onChange={this.updateInput} 
         value={this.state.userEmail}/>
         
-        <button type="submit" disabled={this.state.userData === null}>Add Tour</button>  
+        <button type="submit" disabled={!this.state.userData}>Add Tour</button>  
         </form>
       </section>
 
