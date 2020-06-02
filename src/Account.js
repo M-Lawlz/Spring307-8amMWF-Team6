@@ -4,7 +4,9 @@ import { Avatar, Button, CardMedia } from "@material-ui/core";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
+import { Link } from "react-router-dom";
 import React from "react";
+import ReactPlayer from "react-player";
 import Sidebar from "react-sidebar";
 
 export default class extends React.Component {
@@ -22,6 +24,7 @@ export default class extends React.Component {
       sidebarOpen: false,
       user: null,
       userData: null,
+      userTours: null,
     };
   }
 
@@ -29,9 +32,9 @@ export default class extends React.Component {
     await App.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user: user });
-        this.fetchUserInfo();
         this.fetchProfilePicture();
         this.fetchCoverPhoto();
+        this.fetchUserTours();
       }
     });
   }
@@ -74,6 +77,28 @@ export default class extends React.Component {
         if (doc.exists) {
           this.setState({ userData: doc.data() });
         }
+      })
+      .catch((error) => {
+        console.error("Error: ", error.message);
+      });
+  }
+
+  async fetchUserTours() {
+    await this.fetchUserInfo();
+    const fetchedTours = [];
+    const toursRef = App.firestore().collection("Tours");
+    await toursRef
+      .where("userEmail", "==", this.state.user.email)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.empty) {
+          console.error("Error: No matching documents.");
+          return;
+        }
+        snapshot.forEach((document) => {
+          fetchedTours.push(document.data());
+        });
+        this.setState({ userTours: fetchedTours });
       })
       .catch((error) => {
         console.error("Error: ", error.message);
@@ -195,7 +220,7 @@ export default class extends React.Component {
             />
           ) : null}
           <div
-            class={"centered"}
+            className={"centered"}
             style={{ flexDirection: "column", marginTop: 20 }}
           >
             <Avatar
@@ -215,15 +240,33 @@ export default class extends React.Component {
             />
             <h1>Hi there, {this.state.userData.firstName}.</h1>
             <h2>
-              {this.state.userData.tours
-                ? "Here are your tours."
+              {this.state.userTours
+                ? "Here are the tours you've uploaded:"
                 : "It looks like you haven't uploaded any tours yet."}
             </h2>
-            <h3>
-              {this.state.userData.tours
-                ? null
-                : "You can upload a tour using the navigation bar at the top."}
-            </h3>
+            {this.state.userTours ? (
+              this.state.userTours.map((tour) => (
+                <article class="media content-section">
+                  <div class="media-body">
+                    <h3 class="media-heading">
+                      <Link to={"TourPage/" + tour.tourId}>
+                        {tour.location}
+                      </Link>
+                    </h3>
+
+                    <p>{tour.description}</p>
+                    <p>{tour.uploadDate.toString()}</p>
+                    <div class="centered">
+                      <ReactPlayer url={tour.videoUrl} controls />
+                    </div>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <h3>
+                You can upload a tour using the navigation bar at the top.
+              </h3>
+            )}
           </div>
           {this.state.sidebarOpen ? null : (
             <Button

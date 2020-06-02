@@ -90,7 +90,7 @@ class AddTourForm extends React.Component {
         description: this.state.description,
         videoUrl: this.state.videoUrl,
         uploadDate: timeRn,
-        userEmail: this.state.userData.email,
+        userEmail: this.state.user.email,
         uploaderUsername: this.state.userData.username,
         comments: [],
         tourId: this.state.currentTourValue + 1,
