@@ -27,6 +27,7 @@ export default class SignUp extends React.Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         username: this.state.username,
+        toursLiked: []
       })
       .then(this.closeSignUp)
       .catch(this.handleError);

@@ -8,6 +8,7 @@ import React from "react";
 import Tours from "./Tours";
 import UploadTour from "./UploadTour";
 import TourPage from "./components/TourPage";
+import CommentMod from "./components/CommentMod";
 
 export default class App extends React.Component {
   render() {
@@ -22,6 +23,9 @@ export default class App extends React.Component {
             <Route component={Tours} path="/Tours" />
             <Route component={UploadTour} path="/UploadTour" />
             <Route component={TourPage} path="/TourPage/:Id" />
+            <div className="centered">
+              <Route component={CommentMod} path="/TourPage/:Id" />
+            </div>
           </div>
         </HashRouter>
         <footer></footer>

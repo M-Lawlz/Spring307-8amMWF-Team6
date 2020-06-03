@@ -12,9 +12,7 @@ export default class TourPage extends React.Component {
       user: null,
       userData: null,
       userEmail: "",
-      tourId: this.props.location.pathname.substring(
-        this.props.location.pathname.lastIndexOf("/") + 1
-      ),
+      tourId : null,
       editedDesc: ""
     };
   }
@@ -87,7 +85,7 @@ export default class TourPage extends React.Component {
         this.fetchUserInfo();
       }
     });
-
+    this.setTourId();
     const firebase = require("firebase");
     const db = firebase.firestore();
     const toursDb = db.collection("Tours");
@@ -101,6 +99,14 @@ export default class TourPage extends React.Component {
       .catch(function (error) {
         console.log("Error getting document: ", error);
       });
+  }
+
+  setTourId = () => {
+    this.setState({
+      tourId: this.props.location.pathname.substring(
+        this.props.location.pathname.lastIndexOf("/") + 1
+      )
+    });
   }
 
   fetchUserInfo = () => {
@@ -171,7 +177,7 @@ export default class TourPage extends React.Component {
                     <b>Upload Date:</b> {current.uploadDate}
                   </span>
                 </div>
-                <RateSystem></RateSystem>
+                <RateSystem passedTourId={this.state.tourId}></RateSystem>
                 <div class="column"></div>
               </div>
               <br/>
@@ -218,9 +224,9 @@ export default class TourPage extends React.Component {
             </div>
           ) : null}
         </div>
-        <div className="centered">
+        {/* <div className="centered">
           <CommentMod tourId={this.state.tourId} />
-        </div>
+        </div> */}
       </div>
     );
   }

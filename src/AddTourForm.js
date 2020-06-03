@@ -82,7 +82,8 @@ class AddTourForm extends React.Component {
       userEmail: this.state.userEmail,
       uploaderUsername: this.state.userData.username,
       comments: [],
-      tourId: this.state.currentTourValue + 1
+      tourId: this.state.currentTourValue + 1,
+      tourLikes: 0
     }).then((info) => {
       alert("Tour successfully uploaded!");
       /* allows for the tour to be shown immediately in the search bar */
