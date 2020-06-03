@@ -1,6 +1,5 @@
 import React from "react";
 import ReactPlayer from "react-player";
-import CommentMod from "./CommentMod";
 import RateSystem from "./RateSystem";
 import App from "firebase/app";
 
