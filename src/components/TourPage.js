@@ -174,7 +174,7 @@ export default class TourPage extends React.Component {
               </div>
               <br/>
               {
-              (!this.state.userData &&
+              (this.state.userData &&
                   current.uploaderUsername === this.state.userData.username) ?
                 <div className="centered" id="editBox">
                     <div class="row">
