@@ -98,11 +98,19 @@ footer {
   border: #fff;
 }
 
-#myBox {
+#descBox {
   background-color: white;
   border: 3px solid rgb(0, 206, 209);
-  margin: 30px;
+  margin: 40px;
   padding: 10px;
+}
+
+#editBox {
+  background-color: white;
+  border: 3px solid rgb(0, 206, 209);
+  margin: auto;
+  padding: 20px;
+  width: 350px;
 }
 
 .commentDate {
