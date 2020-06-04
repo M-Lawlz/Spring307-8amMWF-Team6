@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentMod renders successfully 1`] = `
+<div>
+  <button
+    disabled=""
+    id="likeButton"
+  >
+    <div>
+      <b>
+        Like!
+      </b>
+       : 0
+    </div>
+  </button>
+</div>
+`;

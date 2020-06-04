@@ -15,7 +15,7 @@ export default class RateSystem extends React.Component {
         }
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         await App.auth().onAuthStateChanged((user) => {
           const firebase = require("firebase");
           const db = firebase.firestore();
