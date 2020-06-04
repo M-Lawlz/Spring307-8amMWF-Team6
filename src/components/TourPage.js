@@ -2,7 +2,7 @@ import React from "react";
 import ReactPlayer from "react-player";
 import RateSystem from "./RateSystem";
 import App from "firebase/app";
-import { withRouter, Router } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class TourPage extends React.Component {
   constructor(props) {
@@ -130,7 +130,6 @@ class TourPage extends React.Component {
   removeDeletedToursFromUsers = (toursLiked, docId) => {
     const firebase = require("firebase");
     const db = firebase.firestore();
-    const usersDb = db.collection("users");
     const currentTour = this.state.tours.find((x) => {
       return x.tourId.toString() === this.state.tourId;
     });
@@ -143,16 +142,7 @@ class TourPage extends React.Component {
     });
   }
 
-  // redirectToTourPage = () => {
-  //   return (
-  //     <Router>
-  //       {this.props.history.push("/Tours")}
-  //     </Router>
-  //   );
-  // }
-
   deleteTour = (e) => {
-    // e.preventDefault();
     const firebase = require("firebase");
     const db = firebase.firestore();
     const usersDb = db.collection("users");
@@ -259,9 +249,6 @@ class TourPage extends React.Component {
             </div>
           ) : null}
         </div>
-        {/* <div className="centered">
-          <CommentMod tourId={this.state.tourId} />
-        </div> */}
       </div>
     );
   }
