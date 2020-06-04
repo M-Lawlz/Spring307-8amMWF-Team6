@@ -108,40 +108,42 @@ class AddTourForm extends React.Component {
       
       <section>
         <form onSubmit={this.addTour}>
-      
-        <label>Tour Name</label>
+        
+        <h3>Tour Name</h3>
+        <label></label>
         <input type="text" 
         name="name" 
         placeholder="Name of Tour" 
         required
         onChange={this.updateInput}
         />
-        <label>Location</label>
+         <h3>Location</h3>
+        <label></label>
         <input type="text" 
         name="location" 
         placeholder="Tour Location"
         required
         onChange={this.updateInput}
         value={this.state.location}/>
-        
-        <label>Description</label>
+        <h3>Description</h3>
+        <label></label>
         <input type="text" 
         name="description"
         placeholder="Tour Description" 
         required
         onChange={this.updateInput} 
         value={this.state.description}/>
-        
-        <label>Embed Url</label>
+         <h3>Embed Url</h3>
+        <label></label>
         <input type="text" 
         name="videoUrl" 
         placeholder="Embed Link"
         required
         onChange={this.updateInput} 
         value={this.state.videoUrl}/>
-
-        <label>Email</label>
-        <input type="text" 
+        <h3>Email</h3> 
+        <label></label>
+        <input type="email" 
         name="userEmail" 
         placeholder="email"
         required

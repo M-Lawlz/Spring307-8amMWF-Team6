@@ -47,7 +47,9 @@ export default class Tours extends React.Component {
         <h1> View Tours </h1>
 
         <p>
+         
           {this.state.tours.map((tour) => (
+             <div id="theDiv">
             <article class="media content-section">
               <div class="media-body">
                 <h3 class="media-heading">
@@ -61,8 +63,13 @@ export default class Tours extends React.Component {
                 </div>
               </div>
             </article>
+              </div>
+
           ))}
+        
         </p>
+
+
       </div>
     );
   }
