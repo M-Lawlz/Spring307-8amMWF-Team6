@@ -2,7 +2,7 @@
 
 exports[`CommentMod renders successfully 1`] = `
 <div
-  class="container"
+  className="container"
 >
   <h1>
     Comments!
@@ -10,34 +10,27 @@ exports[`CommentMod renders successfully 1`] = `
   <hr />
   <br />
   <div
-    class="commentBox"
+    className="commentBox"
   >
     <h2>
       Join the Discussion!
     </h2>
     <form
-      class="commentForm"
+      className="commentForm"
+      onSubmit={[Function]}
     >
-      <div
-        class="MuiFormControl-root MuiTextField-root commentText"
-      >
-        <div
-          class="MuiInputBase-root MuiInput-root MuiInput-underline Mui-disabled Mui-disabled MuiInputBase-formControl MuiInput-formControl"
-        >
-          <input
-            aria-invalid="false"
-            class="MuiInputBase-input MuiInput-input Mui-disabled Mui-disabled"
-            disabled=""
-            placeholder="Drop a comment!"
-            required=""
-            rows="2"
-            type="text"
-            value=""
-          />
-        </div>
-      </div>
+      <WithStyles(ForwardRef(TextField))
+        className="commentText"
+        disabled={true}
+        onChange={[Function]}
+        placeholder="Drop a comment!"
+        required={true}
+        rows="2"
+        type="text"
+        value=""
+      />
       <button
-        disabled=""
+        disabled={true}
         type="submit"
       >
         Login to Comment!
