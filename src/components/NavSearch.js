@@ -38,13 +38,16 @@ export default class NavSearch extends React.Component {
       value: "" + tour.data().tourId,
     };
     selectTourArray.push(newDropdownTour);
+    this.setLocalData(dbTourArray, selectTourArray);
+  };
 
+  setLocalData = (dbTourArray, selectTourArray) => {
     this.setState({
       tours: dbTourArray,
       isSearching: false,
       selectDropdowns: selectTourArray,
     });
-  };
+  }
 
   componentDidMount() {
     const firebase = require("firebase");
@@ -80,18 +83,21 @@ export default class NavSearch extends React.Component {
       var selected = this.state.tours.find((tur) => {
         return value.label === tur.location;
       });
-      this.setState({
-        currentTour: selected,
-      });
+      this.updateTour(selected);
     }
   };
+
+  updateTour = (tour) => {
+    this.setState({
+      currentTour: tour
+    });
+  }
 
   render() {
     const options = this.state.selectDropdowns;
     return (
       <div className="rowC">
         <div id="container" style={{ width: "200px" }}>
-          {/* TODO: Implement at most 5 dropdowns & figure out text color */}
           <Select
             placeholder="Search..."
             options={options}
