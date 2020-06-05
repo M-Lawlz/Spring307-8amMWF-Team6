@@ -2,6 +2,15 @@ import React from "react";
 
 export default class Home extends React.Component {
   render() {
-    return <h1>Welcome to SimTrek!</h1>;
+
+    return (
+
+<div  className="hi">
+	<h1> Welcome to SimTrek!</h1>
+</div>
+)
+    	
   }
+
+
 }

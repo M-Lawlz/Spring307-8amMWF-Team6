@@ -67,7 +67,7 @@ export default class NavBar extends React.Component {
     } else {
       return (
         <div>
-          <AppBar position="static" style={{ background: "#00CED1" }}>
+          <AppBar position="static" style={{ background: "#19170" }}>
             <Toolbar>
               <IconButton
                 edge="start"
@@ -75,15 +75,22 @@ export default class NavBar extends React.Component {
                 aria-label="menu"
               ></IconButton>
               <Typography variant="h6">
-                <div>
-                  <h2>SimTrek</h2>
-                </div>
+               
               </Typography>
               <HashRouter>
+                <Link style={{ color: "inherit" }} to={"/"}>
+                  <Button
+                    color={"inherit"}
+                    style={{ marginLeft: 10, width: 100 }}
+                  >
+                    <h3>SimTrek</h3>
+                  </Button>
+                </Link>
+
                 <Link style={{ color: "inherit" }} to={"/About"}>
                   <Button
                     color={"inherit"}
-                    style={{ marginLeft: 50, width: 150 }}
+                    style={{ marginLeft: 25, width: 150 }}
                   >
                     <h3>About Us</h3>
                   </Button>
@@ -109,8 +116,8 @@ export default class NavBar extends React.Component {
               </HashRouter>
               <Grid
                 container
-                alignItems="center"
-                justify="flex-end"
+                alignItems="marginLeft"
+                justify="flex-left"
                 direction="row"
               >
                 {this.state.user ? null : (

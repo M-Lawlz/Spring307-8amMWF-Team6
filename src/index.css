@@ -11,3 +11,86 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+
+
+h1 { color: #000000; font-family: 'Open Sans', sans-serif; font-size: 34px; font-weight: 300; line-height: 40px; margin: 0 0 16px;padding-top: 30px }
+
+
+h2 { color: #000000; font-family: 'Open Sans', sans-serif; font-size: 24px; font-weight: 300; line-height: 32px; margin: 0 0 20px;padding-top: 30px}
+
+h3 { color: #FFFFF; font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 300; line-height: 40px; margin: 0 0 10px; }
+
+p { color: #222; font-family: 'Open Sans', sans-serif; font-size: 15px; font-weight: 400; line-height: 24px; margin: 0 0 10px; padding: 10px}
+
+h4 { color: #111; font-family: 'Open Sans Condensed', sans-serif; font-size: 64px; font-weight: 700; line-height: 64px; margin: 0 0 0; padding: 20px 30px; text-align: center; text-transform: uppercase; }
+
+
+#theDiv {
+
+  width: 700px;
+  border:  solid blue .012px;
+   text-align:center;
+    margin:0px auto;
+    padding-bottom: 50px;
+    box-shadow: 0 20px 50px rgba(59, 43, 91, 0.7);
+
+
+
+}
+
+input[type=text] {
+
+  width: 50%;
+
+
+  margin:0px auto;
+  margin-bottom:10px;
+  border: 1px solid blue;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px rgba(59, 43, 91, 0.7);
+  padding: 12px 20px;
+}
+input[type=email] {
+
+  width: 50%;
+
+
+  margin:0px auto;
+  margin-bottom:10px;
+  border: 1px solid blue;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px rgba(59, 43, 91, 0.7);
+  padding: 12px 20px;
+}
+
+input[type=text]:focus {
+  background-color: linear-gradient(red, purple);
+}
+
+input[type="text"]:hover{
+border: 1px solid #999;
+border-radius: 5px;
+}
+
+input[type="text"]:focus:hover{
+outline: none;
+box-shadow: 0px 0px 5px #61C5FA;
+border:1px solid #5AB0DB;
+border-radius:0;
+}
+
+body {
+ background-color: #cccccc;
+}
+
+
+input[type=submit] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
