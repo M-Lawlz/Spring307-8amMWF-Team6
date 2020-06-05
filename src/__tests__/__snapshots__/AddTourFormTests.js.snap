@@ -3,18 +3,20 @@
 exports[`AddTourForm renders successfully. 1`] = `
 <section>
   <form>
-    <label>
+    <h3>
       Tour Name
-    </label>
+    </h3>
+    <label />
     <input
       name="name"
       placeholder="Name of Tour"
       required=""
       type="text"
     />
-    <label>
+    <h3>
       Location
-    </label>
+    </h3>
+    <label />
     <input
       name="location"
       placeholder="Tour Location"
@@ -22,9 +24,10 @@ exports[`AddTourForm renders successfully. 1`] = `
       type="text"
       value=""
     />
-    <label>
+    <h3>
       Description
-    </label>
+    </h3>
+    <label />
     <input
       name="description"
       placeholder="Tour Description"
@@ -32,9 +35,10 @@ exports[`AddTourForm renders successfully. 1`] = `
       type="text"
       value=""
     />
-    <label>
+    <h3>
       Embed Url
-    </label>
+    </h3>
+    <label />
     <input
       name="videoUrl"
       placeholder="Embed Link"
@@ -42,14 +46,15 @@ exports[`AddTourForm renders successfully. 1`] = `
       type="text"
       value=""
     />
-    <label>
+    <h3>
       Email
-    </label>
+    </h3>
+    <label />
     <input
       name="userEmail"
       placeholder="email"
       required=""
-      type="text"
+      type="email"
       value=""
     />
     <button

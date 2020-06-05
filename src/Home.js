@@ -5,9 +5,9 @@ export default class Home extends React.Component {
 
     return (
 
-    <div  className="hi">
-    	<h1> Welcome to SimTrek!</h1>
-    	</div>
+<div  className="hi">
+	<h1> Welcome to SimTrek!</h1>
+</div>
 )
     	
   }
