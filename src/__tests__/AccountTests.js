@@ -4,6 +4,13 @@ import React from "react";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 
+test("Sets coverPhoto editing status correctly.", () => {
+  const account = shallow(<Account />);
+  const instance = account.instance();
+  instance.coverPhotoClicked(true);
+  expect(instance.state.isChangingCoverPhoto).toBe(true);
+});
+
 test("Sets email editing status correctly.", () => {
   const account = shallow(<Account />);
   const instance = account.instance();
@@ -30,6 +37,13 @@ test("Sets password editing status correctly.", () => {
   const instance = account.instance();
   instance.passwordClicked(true);
   expect(instance.state.isChangingPassword).toBe(true);
+});
+
+test("Sets profilePicture editing status correctly.", () => {
+  const account = shallow(<Account />);
+  const instance = account.instance();
+  instance.profilePictureClicked(true);
+  expect(instance.state.isChangingProfilePicture).toBe(true);
 });
 
 test("Sets sidebar status correctly.", () => {
@@ -83,6 +97,26 @@ test("Mounts password formType correctly.", () => {
     expect(accountForm.state("inputType")).toBe("password");
     expect(accountForm.state("printType")).toBe("Password");
   }, 0);
+});
+
+test("Mounts profilePicture formType correctly.", () => {
+  const accountForm = shallow(<AccountForm formType={"profilePicture"} />);
+  setTimeout(() => {
+    accountForm.update();
+    expect(accountForm.state("formType")).toBe("profilePicture");
+    expect(accountForm.state("inputType")).toBe("file");
+    expect(accountForm.state("printType")).toBe("Profile Picture");
+  })
+});
+
+test("Mounts coverPhoto formType correctly.", () => {
+  const accountForm = shallow(<AccountForm formType={"coverPhoto"}/>);
+  setTimeout(() => {
+    accountForm.update();
+    expect(accountForm.state("formType")).toBe("coverPhoto");
+    expect(accountForm.state("inputType")).toBe("file");
+    expect(accountForm.state("printType")).toBe("Cover Photo");
+  })
 });
 
 test("Attempts to update an email form correctly.", () => {
