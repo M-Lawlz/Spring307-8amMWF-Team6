@@ -101,7 +101,7 @@ export default class NavSearch extends React.Component {
           <Select
             placeholder="Search..."
             options={options}
-            maxMenuHeight={190}
+            maxMenuHeight={180}
             onClick={this.handleNavSearch}
             onChange={this.handleSearchChange}
             theme={(theme) => ({
@@ -123,7 +123,11 @@ export default class NavSearch extends React.Component {
               state: this.state.currentTour,
             }}
           >
-            <Button style={{ flex: 1 }}>GO</Button>
+            <Button style={{ flex: 1 }}>
+                <p style={{color : "white"}}>
+                  GO
+                </p>
+              </Button>
           </Link>
         </HashRouter>
       </div>
