@@ -16,6 +16,7 @@ exports[`UploadTour renders successfully 1`] = `
       <h2>
         Add Tour
       </h2>
+      <hr />
       <AddTourForm />
     </div>
     <div
