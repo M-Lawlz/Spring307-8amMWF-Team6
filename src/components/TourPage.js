@@ -1,9 +1,10 @@
 import React from "react";
 import ReactPlayer from "react-player";
-import CommentMod from "./CommentMod";
+import RateSystem from "./RateSystem";
 import App from "firebase/app";
+import { withRouter } from 'react-router-dom';
 
-export default class TourPage extends React.Component {
+class TourPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,9 +12,7 @@ export default class TourPage extends React.Component {
       user: null,
       userData: null,
       userEmail: "",
-      tourId: this.props.location.pathname.substring(
-        this.props.location.pathname.lastIndexOf("/") + 1
-      ),
+      tourId : null,
       editedDesc: ""
     };
   }
@@ -60,6 +59,7 @@ export default class TourPage extends React.Component {
       userEmail: current.userEmail,
     }).then((info) => {
         alert("Description successfully updated!");
+        window.location.reload(true);
     }).catch(function(error) {
         console.log("Error with updating database! "  + error);
     });
@@ -86,7 +86,7 @@ export default class TourPage extends React.Component {
         this.fetchUserInfo();
       }
     });
-
+    this.setTourId();
     const firebase = require("firebase");
     const db = firebase.firestore();
     const toursDb = db.collection("Tours");
@@ -98,8 +98,17 @@ export default class TourPage extends React.Component {
         });
       })
       .catch(function (error) {
+        alert("Database connection failed to establish!");
         console.log("Error getting document: ", error);
       });
+  }
+
+  setTourId = () => {
+    this.setState({
+      tourId: this.props.location.pathname.substring(
+        this.props.location.pathname.lastIndexOf("/") + 1
+      )
+    });
   }
 
   fetchUserInfo = () => {
@@ -118,17 +127,40 @@ export default class TourPage extends React.Component {
       });
   };
 
-  deleteTour = (e) => {
-    // e.preventDefault();
+  removeDeletedToursFromUsers = (toursLiked, docId) => {
     const firebase = require("firebase");
     const db = firebase.firestore();
+    const currentTour = this.state.tours.find((x) => {
+      return x.tourId.toString() === this.state.tourId;
+    });
+    const updatedLikedTours = toursLiked.filter(
+      tur => tur !== currentTour.location
+    );
+    var docRef = db.collection("users").doc(docId);
+    docRef.update({
+      toursLiked : updatedLikedTours
+    });
+  }
+
+  deleteTour = (e) => {
+    const firebase = require("firebase");
+    const db = firebase.firestore();
+    const usersDb = db.collection("users");
     if(window.confirm("Are you sure you want to delete this tour?")) {
         db.collection("Tours").doc(this.state.tourId.toString())
         .delete().then((info) => {
             alert("Tour was successfully deleted!");
+            this.props.history.push("/Tours");
             window.location.reload(true);
         }).catch(function(error) {
             console.log("Error with deleting tour! "  + error);
+        });
+        usersDb.get().then((userInfo) => {
+          userInfo.forEach((userDoc) => {
+            // on a successful delete, get rid of this tour
+            // from each of the user's liked tour pages
+            this.removeDeletedToursFromUsers(userDoc.data().toursLiked, userDoc.id);
+          });
         });
     }
   };
@@ -170,6 +202,7 @@ export default class TourPage extends React.Component {
                     <b>Upload Date:</b> {current.uploadDate}
                   </span>
                 </div>
+                <RateSystem passedTourId={this.state.tourId}></RateSystem>
                 <div class="column"></div>
               </div>
               <br/>
@@ -216,10 +249,9 @@ export default class TourPage extends React.Component {
             </div>
           ) : null}
         </div>
-        <div className="centered">
-          <CommentMod tourId={this.state.tourId} />
-        </div>
       </div>
     );
   }
 }
+
+export default withRouter(TourPage);

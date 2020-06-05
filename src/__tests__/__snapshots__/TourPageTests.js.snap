@@ -5,54 +5,5 @@ exports[`TourPage renders successfully 1`] = `
   class="tourPage"
 >
   <div />
-  <div
-    class="centered"
-  >
-    <div
-      class="container"
-    >
-      <h1>
-        Comments!
-      </h1>
-      <hr />
-      <br />
-      <div
-        class="commentBox"
-      >
-        <h2>
-          Join the Discussion!
-        </h2>
-        <form
-          class="commentForm"
-        >
-          <div
-            class="MuiFormControl-root MuiTextField-root commentText"
-          >
-            <div
-              class="MuiInputBase-root MuiInput-root MuiInput-underline Mui-disabled Mui-disabled MuiInputBase-formControl MuiInput-formControl"
-            >
-              <input
-                aria-invalid="false"
-                class="MuiInputBase-input MuiInput-input Mui-disabled Mui-disabled"
-                disabled=""
-                placeholder="Drop a comment!"
-                required=""
-                rows="2"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-          <button
-            disabled=""
-            type="submit"
-          >
-            Login to Comment!
-          </button>
-        </form>
-        <div />
-      </div>
-    </div>
-  </div>
 </div>
 `;

@@ -9,7 +9,9 @@ export default class CommentMod extends React.Component {
       newComment: "",
       user: null,
       userData: null,
-      tourId: this.props.tourId,
+      tourId: this.props.location.pathname.substring(
+        this.props.location.pathname.lastIndexOf("/") + 1
+      ),
       currentTourComments: null,
     };
   }
@@ -110,7 +112,8 @@ export default class CommentMod extends React.Component {
       )
     ) {
       const updatedComs = this.state.currentTourComments.filter(
-        (doc) => doc.comment !== commentToDelete
+        doc => doc.userName !== this.state.userData.username
+              || doc.comment !== commentToDelete
       );
       var docRef = db.collection("Tours").doc(this.state.tourId.toString());
       docRef.update({
