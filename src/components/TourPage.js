@@ -104,10 +104,16 @@ class TourPage extends React.Component {
   }
 
   setTourId = () => {
+    var extractedId = this.props.location.pathname.substring(
+      this.props.location.pathname.lastIndexOf("/") + 1
+    );
+    if(extractedId === "undefined") {
+      alert("Tour not found! Please scroll through our search tours page!");
+      this.props.history.push("/Tours");
+      window.location.reload(true);
+    }
     this.setState({
-      tourId: this.props.location.pathname.substring(
-        this.props.location.pathname.lastIndexOf("/") + 1
-      )
+      tourId: extractedId
     });
   }
 
