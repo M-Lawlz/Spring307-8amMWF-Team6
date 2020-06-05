@@ -22,6 +22,7 @@ export default class UploadTour extends React.Component {
         <div className="flex-row">
           <div className="flex-large">
             <h2>Add Tour</h2>
+            <hr />
             <AddTourForm />
           </div>
           <div className="flex-large"></div>

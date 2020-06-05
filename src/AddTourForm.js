@@ -1,5 +1,6 @@
 import React from 'react';
 import App from "firebase/app";
+import { Button } from "@material-ui/core";
 
 class AddTourForm extends React.Component {
   constructor(props) {
@@ -109,7 +110,6 @@ class AddTourForm extends React.Component {
       
       <section>
         <form onSubmit={this.addTour}>
-        
         <h3>Tour Name</h3>
         <label></label>
         <input type="text" 
@@ -136,7 +136,7 @@ class AddTourForm extends React.Component {
         value={this.state.description}/>
          <h3>Embed Url</h3>
         <label></label>
-        <input type="text" 
+        <input type="url" 
         name="videoUrl" 
         placeholder="Embed Link"
         required
@@ -150,8 +150,10 @@ class AddTourForm extends React.Component {
         required
         onChange={this.updateInput} 
         value={this.state.userEmail}/>
-        
-        <button type="submit" disabled={!this.state.userData}>Add Tour</button>  
+        <br />
+        <br />
+        <Button type="submit" disabled={!this.state.userData} 
+                style={{backgroundColor: "#FFF"}}>Add Tour</Button>  
         </form>
       </section>
 
