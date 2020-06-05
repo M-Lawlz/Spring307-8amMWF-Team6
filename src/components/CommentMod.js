@@ -119,11 +119,16 @@ export default class CommentMod extends React.Component {
       docRef.update({
         comments: updatedComs,
       });
-      this.setState({
-        currentTourComments: updatedComs,
-      });
+      console.log(updatedComs);
+      this.updateLocalTourComments(updatedComs);
     }
   };
+
+  updateLocalTourComments = (updatedComs) => {
+    this.setState({
+      currentTourComments: updatedComs
+    });
+  }
 
   render() {
     return (
