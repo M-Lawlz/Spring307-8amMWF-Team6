@@ -87,7 +87,11 @@ exports[`NavSearch renders successfully. 1`] = `
       <span
         class="MuiButton-label"
       >
-        GO
+        <p
+          style="color:white"
+        >
+          GO
+        </p>
       </span>
     </button>
   </a>
