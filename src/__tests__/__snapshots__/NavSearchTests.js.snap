@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavSearch renders successfully 1`] = `
+exports[`NavSearch renders successfully. 1`] = `
 <div
   class="rowC"
 >

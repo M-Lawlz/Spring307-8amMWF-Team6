@@ -2,15 +2,18 @@
 
 exports[`AddTourForm renders successfully. 1`] = `
 <section>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <h3>
       Tour Name
     </h3>
     <label />
     <input
       name="name"
+      onChange={[Function]}
       placeholder="Name of Tour"
-      required=""
+      required={true}
       type="text"
     />
     <h3>
@@ -19,8 +22,9 @@ exports[`AddTourForm renders successfully. 1`] = `
     <label />
     <input
       name="location"
+      onChange={[Function]}
       placeholder="Tour Location"
-      required=""
+      required={true}
       type="text"
       value=""
     />
@@ -30,8 +34,9 @@ exports[`AddTourForm renders successfully. 1`] = `
     <label />
     <input
       name="description"
+      onChange={[Function]}
       placeholder="Tour Description"
-      required=""
+      required={true}
       type="text"
       value=""
     />
@@ -41,8 +46,9 @@ exports[`AddTourForm renders successfully. 1`] = `
     <label />
     <input
       name="videoUrl"
+      onChange={[Function]}
       placeholder="Embed Link"
-      required=""
+      required={true}
       type="url"
       value=""
     />
@@ -52,26 +58,25 @@ exports[`AddTourForm renders successfully. 1`] = `
     <label />
     <input
       name="userEmail"
+      onChange={[Function]}
       placeholder="email"
-      required=""
+      required={true}
       type="email"
       value=""
     />
     <br />
     <br />
-    <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text Mui-disabled Mui-disabled"
-      disabled=""
-      style="background-color:#FFF"
-      tabindex="-1"
+    <WithStyles(ForwardRef(Button))
+      disabled={true}
+      style={
+        Object {
+          "backgroundColor": "#FFF",
+        }
+      }
       type="submit"
     >
-      <span
-        class="MuiButton-label"
-      >
-        Add Tour
-      </span>
-    </button>
+      Add Tour
+    </WithStyles(ForwardRef(Button))>
   </form>
 </section>
 `;

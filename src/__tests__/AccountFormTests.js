@@ -45,6 +45,26 @@ test("Mounts password formType correctly.", () => {
   }, 0);
 });
 
+test("Mounts profilePicture formType correctly.", () => {
+  const accountForm = shallow(<AccountForm formType={"profilePicture"} />);
+  setTimeout(() => {
+    accountForm.update();
+    expect(accountForm.state("formType")).toBe("profilePicture");
+    expect(accountForm.state("inputType")).toBe("file");
+    expect(accountForm.state("printType")).toBe("Profile Picture");
+  })
+});
+
+test("Mounts coverPhoto formType correctly.", () => {
+  const accountForm = shallow(<AccountForm formType={"coverPhoto"}/>);
+  setTimeout(() => {
+    accountForm.update();
+    expect(accountForm.state("formType")).toBe("coverPhoto");
+    expect(accountForm.state("inputType")).toBe("file");
+    expect(accountForm.state("printType")).toBe("Cover Photo");
+  })
+});
+
 test("Attempts to update an email form correctly.", () => {
   const accountForm = shallow(<AccountForm formType={"email"} />);
   const updateEmailSpy = jest.fn(() => Promise.resolve());
