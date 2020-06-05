@@ -53,15 +53,26 @@ export default class RateSystem extends React.Component {
 
         /* identify the current tour */
         if(newDbTour.tourId.toString() === this.state.tourId.toString()) {
-          this.setState({
-            tourLikes : newDbTour.tourLikes,
-            currentTour : newDbTour
-          });
+          this.setCurrentTourInfo(newDbTour.tourLikes, newDbTour);
         }
-        this.setState({
-          tours: dbTourArray,
-        });
-      };
+        this.loadupTours(dbTourArray);
+    };
+
+    /* set info for current tour */
+    setCurrentTourInfo = (likes, tour) => {
+      this.setState({
+        tourLikes : likes,
+        currentTour : tour
+      });
+    }
+
+    loadupTours = (dbtourarray) => {
+      this.setState({
+        tours: dbtourarray
+      });
+    };
+
+    
 
     fetchUserInfo = () => {
         const userDoc = App.firestore()
