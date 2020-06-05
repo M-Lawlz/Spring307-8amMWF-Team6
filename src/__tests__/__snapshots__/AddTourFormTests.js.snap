@@ -43,7 +43,7 @@ exports[`AddTourForm renders successfully. 1`] = `
       name="videoUrl"
       placeholder="Embed Link"
       required=""
-      type="text"
+      type="url"
       value=""
     />
     <h3>
@@ -57,11 +57,20 @@ exports[`AddTourForm renders successfully. 1`] = `
       type="email"
       value=""
     />
+    <br />
+    <br />
     <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text Mui-disabled Mui-disabled"
       disabled=""
+      style="background-color:#FFF"
+      tabindex="-1"
       type="submit"
     >
-      Add Tour
+      <span
+        class="MuiButton-label"
+      >
+        Add Tour
+      </span>
     </button>
   </form>
 </section>

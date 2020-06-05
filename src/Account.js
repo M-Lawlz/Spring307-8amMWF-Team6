@@ -271,7 +271,7 @@ export default class extends React.Component {
           {this.state.sidebarOpen ? null : (
             <Button
               onClick={this.setSidebarStatus}
-              style={{ position: "absolute", left: 10, top: 110, zIndex: 2 }}
+              style={{ backgroundColor: "#FFF", borderRadius: 5, position: "absolute", left: 10, top: 110, zIndex: 2 }}
             >
               Account Settings
             </Button>
